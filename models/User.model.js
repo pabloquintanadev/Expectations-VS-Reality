@@ -33,7 +33,10 @@ const userSchema = new Schema(
         savedShorts: [{
             type: Schema.Types.ObjectId,
             ref: 'Short'
-        }]
+        }],
+        savedMovies: {
+            type: Array
+        }
     },
     {
         timestamps: true,

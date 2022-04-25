@@ -4,6 +4,8 @@ const saltRounds = 10
 
 const User = require('./../models/User.model')
 
+const { isLoggedOut } = require('./../middleware/route-guard')
+
 
 router.get('/register', isLoggedOut, (req, res) => {
     res.render('auth/register-form')

@@ -11,6 +11,9 @@ router.use('/auth', require('./auth.routes'))
 // movies routes
 router.use('/movies', require('./movies.routes'))
 
+// post routes
+router.use('/posts', require('./posts.routes'))
+
 // profile routes
 router.use('/profile', require('./profile.routes'))
 
