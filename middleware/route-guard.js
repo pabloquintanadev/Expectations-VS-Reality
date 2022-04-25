@@ -4,7 +4,7 @@ const isLoggedIn = (req, res, next) => {
 }
 
 const isLoggedOut = (req, res, next) => {
-    req.session.currentUser ? res.redirect('/mi-perfil') : next()
+    req.session.currentUser ? res.redirect('/') : next()
 }
 
 

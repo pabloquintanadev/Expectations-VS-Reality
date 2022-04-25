@@ -1,11 +1,11 @@
 const router = require("express").Router()
 
-const Message = require('./../models/Message.model')
-const Post = require('./../models/Post.model')
-const Short = require('./../models/Short.model')
-const User = require('./../models/User.model')
+const Message = require('../models/Message.model')
+const Post = require('../models/Post.model')
+const Short = require('../models/Short.model')
+const User = require('../models/User.model')
 
-const APIHandler = require('./../public/js/APIHandler')
+const APIHandler = require('../public/js/APIHandler')
 const imdb = new APIHandler()
 
 

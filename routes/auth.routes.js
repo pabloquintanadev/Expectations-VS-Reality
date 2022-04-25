@@ -13,7 +13,7 @@ router.get('/register', isLoggedOut, (req, res) => {
 
 router.post('/register', isLoggedOut, (req, res, next) => {
 
-    const { username, email, plainPassword } = req.body
+    const { name, username, email, plainPassword } = req.body
 
     bcryptjs
         .genSalt(saltRounds)
@@ -24,12 +24,12 @@ router.post('/register', isLoggedOut, (req, res, next) => {
 })
 
 
-router.get('/loginsesion', isLoggedOut, (req, res) => {
+router.get('/login', isLoggedOut, (req, res) => {
     res.render('auth/login-form')
 })
 
 
-router.post('/login', isLoggedOut, (req, res, next) => {
+router.post('/login', (req, res, next) => {
 
     const { email, plainPassword } = req.body
 
@@ -51,7 +51,7 @@ router.post('/login', isLoggedOut, (req, res, next) => {
                 return
             }
 
-            req.session.currentUser = user          // <= THIS means logging in a user
+            req.session.currentUser = user
             res.redirect('/')
         })
         .catch(error => next(error));
