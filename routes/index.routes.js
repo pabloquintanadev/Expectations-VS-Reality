@@ -5,4 +5,7 @@ router.get("/", (req, res, next) => {
   res.render("index");
 });
 
+// // auth routes
+// router.use('/auth', require('./auth.routes'))
+
 module.exports = router;
