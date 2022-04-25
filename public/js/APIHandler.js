@@ -4,6 +4,11 @@ class APIHandler {
             baseURL: 'https://imdb-api.com/'
         })
     }
-    //search movie
+    
+    //APIKey = k_re2pw0li
+
     //get movie details
+    getDetails(imdbId){
+        return this.axiosApp.get(`/en/API/Trailer/k_re2pw0li/${imdbId}`)
+    }
 }
