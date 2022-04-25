@@ -21,7 +21,6 @@ Expectation VS Reality
 | `POST`  | `/:filmId/bullshitOut`  | Unmark a film as a *bullshit* (only for Creators or Admins)  | next() |
 | | ||
 | **MOVIES**  |  | **folder: movies**   |
-| `GET`  | `/movies`  | Retrieve all movies  | movies-list |
 | `POST`  | `/movies/search`  | Retrieve all movies that fit the searching  | movies-search-result |
 | `GET`  | `/movies/:movieId`  | Retrieve one single movie page  | movieId |
 | `POST`  | `/movies/:movieId/save`  | Save the film in the user's list  | movieId |
