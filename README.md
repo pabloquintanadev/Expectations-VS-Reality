@@ -2,16 +2,16 @@
 Expectation VS Reality
 
 
-| Method | URL | description |
-| ----- | ------------- | ------------- | 
-| `GET`  | `/`  | Index page  |
+| Method | URL | description | view |
+| ----- | ------------- | ------------- | --------- |
+| `GET`  | `/`  | Index page  | index |
 | | |
-| **AUTH** | | |
-| `GET`  | `/register`  | Register form  |
-| `POST`  | `/register`  | Register succees/error  |
-| `GET`  | `/login`  | Login form  |
-| `POST`  | `/login`  | Login succees/error  |
-| `POST`  | `/logout`  | Logout of current user  |
+| **AUTH** | | folder: auth|
+| `GET`  | `/register`  | Register form  | register-form |
+| `POST`  | `/register`  | Register succees/error  | index |
+| `GET`  | `/login`  | Login form  | login-form |
+| `POST`  | `/login`  | Login succees/error  | index |
+| `POST`  | `/logout`  | Logout of current user  | index |
 | | ||
 | **VALORATION BUTTONS** | | |
 | `POST`  | `/:userId/like`  | Add +1 to the user's likes (only for logged in users) |
