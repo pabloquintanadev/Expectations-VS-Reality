@@ -2,16 +2,16 @@ const { Schema, model } = require("mongoose");
 
 const postSchema = new Schema(
   {
-    Author: {
-        type : Schema.Types.ObjectId, 
-        ref: 'User' 
+    author: {
+      type: Schema.Types.ObjectId,
+      ref: 'User'
     },
     textContent: {
-        type: String
+      type: String
     },
     type: {
-        type: String,
-        enum: ['SUMMARY','COMMENTS','SPOILERS']
+      type: String,
+      enum: ['SUMMARY', 'COMMENTS', 'SPOILERS']
     },
 
   },
