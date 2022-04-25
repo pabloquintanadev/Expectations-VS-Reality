@@ -22,6 +22,15 @@ const shortSchema = new Schema(
       type: String,
       enum: ['DRAMA', 'COMEDY', 'ACTION', 'THRILLER', 'MUSICAL', 'HORROR', 'SCI-FI', 'WESTERN', 'DOCUMENTARY', 'ROMANCE', 'ADVENTURE', 'HISTORY', 'SPORTS', 'ANIMATION', 'EROTIC', 'NOIR', 'JC'],
       required: true
+    },
+    isMasterpiece: {
+      type: Boolean
+    },
+    isBullshit: {
+      type: Boolean
+    },
+    isShort: {
+      type: Boolean
     }
   },
   {
