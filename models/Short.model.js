@@ -17,7 +17,7 @@ const shortSchema = new Schema(
     videoFile: {
         type: String,
         required: true
-    }
+    },
      genre: {
         type: Array,
         enum: ['DRAMA', 'COMEDY', 'ACTION', 'THRILLER', 'MUSICAL', 'HORROR', 'SCI-FI', 'WESTERN', 'DOCUMENTARY', 'ROMANCE', 'ADVENTURE', 'HISTORY', 'SPORTS', 'ANIMATION', 'EROTIC', 'NOIR', 'JC'],
