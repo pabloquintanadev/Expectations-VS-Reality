@@ -25,19 +25,6 @@ router.get('/', (req, res) => {
         .catch(err => console.log(err))
 })
 
-router.get('/:shortId', (req, res) => {
-
-    const { id } = req.params
-
-    Short
-        .findById(id)
-        .populate('author')
-        .then(short => {
-            res.render('shorts/short-details', short)
-        })
-        .catch(err => console.log(err))
-})
-
 // CREATE
 
 
@@ -51,14 +38,28 @@ router.post('/new-short', (req, res) => {
     Short
         .create(req.body)
         .then(newShort => {
-            res.redirect(`/shorts/${newShort._id}`)
+            res.redirect(`/shorts/details/${newShort._id}`)
+        })
+        .catch(err => console.log(err))
+})
+
+
+router.get('/details/:shortId', (req, res) => {
+
+    const { id } = req.params
+
+    Short
+        .findById(id)
+        .populate('author')
+        .then(short => {
+            res.render('shorts/short-details', short)
         })
         .catch(err => console.log(err))
 })
 
 //EDIT
 
-router.get('/:shortId/edit', (req, res) => {
+router.get('/edit/:shortId', (req, res) => {
 
     const { id } = req.params
 
@@ -70,7 +71,7 @@ router.get('/:shortId/edit', (req, res) => {
         .catch(err => console.log(err))
 })
 
-router.post('/:shortId/edit', (req, res) => {
+router.post('/edit/:shortId', (req, res) => {
 
     const { id } = req.params
 
@@ -84,14 +85,14 @@ router.post('/:shortId/edit', (req, res) => {
 
 // DELETE
 
-router.post('/:shortId/delete', (req, res) => {
+router.post('/delete/:shortId/', (req, res) => {
 
-    const { id } = req.params
+    // const { id } = req.params
 
     Short
-        .findByIdAndDelete(id)
+        .findOneAndDelete(req.params._id)
         .then(() => {
-            res.redirect('/shorts/')
+            res.redirect('/shorts')
         })
         .catch(err => console.log(err))
 })

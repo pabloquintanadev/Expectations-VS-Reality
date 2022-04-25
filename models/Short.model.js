@@ -8,20 +8,20 @@ const shortSchema = new Schema(
     },
     title: {
       type: String,
-      required: true
+
     },
     summary: {
       type: String,
-      required: true
+
     },
     videoFile: {
       type: String,
-      required: true
+
     },
     genre: {
       type: String,
       enum: ['DRAMA', 'COMEDY', 'ACTION', 'THRILLER', 'MUSICAL', 'HORROR', 'SCI-FI', 'WESTERN', 'DOCUMENTARY', 'ROMANCE', 'ADVENTURE', 'HISTORY', 'SPORTS', 'ANIMATION', 'EROTIC', 'NOIR', 'JC'],
-      required: true
+
     },
     isMasterpiece: {
       type: Boolean
