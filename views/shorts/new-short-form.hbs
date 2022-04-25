@@ -1,0 +1,45 @@
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-5">
+            <h1>New short</h1>
+            <hr>
+            <form action="/shorts/new-short" method="POST">
+                <div class="mb-3">
+                    <label for="title" class="form-label">Title</label>
+                    <input type="title" class="form-control" id="title" name="title">
+                </div>
+                <div class="mb-3">
+                    <label for="summary" class="form-label">Summary</label>
+                    <input type="summary" class="form-control" id="summary" name="summary">
+                </div>
+                <div class="mb-3">
+                    <select class="form-select" aria-label="Default select example">
+                        <option selected>Choose a genre</option>
+                        <option value="DRAMA">Drama</option>
+                        <option value="COMEDY">Comedy</option>
+                        <option value="ACTION">Action</option>
+                        <option value="THRILLER">Thriller</option>
+                        <option value="MUSICAL">Musical</option>
+                        <option value="HORROR">Horror</option>
+                        <option value="SCI-FI">Sci-fi</option>
+                        <option value="WESTERN">Western</option>
+                        <option value="DOCUMENTARY">Documentary</option>
+                        <option value="ROMANCE">Romance</option>
+                        <option value="ADVENTURE">Adventure</option>
+                        <option value="HISTORY">History</option>
+                        <option value="SPORTS">Sports</option>
+                        <option value="ANIMATION">Animation</option>
+                        <option value="EROTIC">Erotic</option>
+                        <option value="NOIR">Noir</option>
+                        <option value="JC">JC</option>
+                    </select>
+                </div>
+
+                {{#if errorMessage}}
+                <div id="error">{{errorMessage}}</div>
+                {{/if}}
+                <button type="submit" class="btn btn-dark">Log in</button>
+            </form>
+        </div>
+    </div>
+</div>
