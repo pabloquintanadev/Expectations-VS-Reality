@@ -58,5 +58,18 @@ router.post('/:postId/edit', (req, res) => {
         .catch(err => console.log(err))
 })
 
+router.post('/:postId/delete', (req, res) => {
+
+    const { id } = req.params
+
+    Post
+        .findByIdAndDelete(id)
+        .then(() => {
+            next()
+        })
+        .catch(err => console.log(err))
+})
+
+
 
 module.exports = router

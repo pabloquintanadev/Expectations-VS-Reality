@@ -31,21 +31,22 @@ HOLA MIGUEL
 | `GET`  | `/movies/masterpieces`  | Retrieve all movies marked as *f------ masterpiece* | masterpieces |
 | `GET`  | `/movies/bullshits`  | Retrieve all movies marked as *bullshit* | bullshits |
 ||||
-| **SHORTS**  |  | **folder: shorts**  |
+| **SHORTS**  | *done* | **folder: shorts**  |
 | `GET`  | `/shorts`  | Retrieve all shorts  | shorts-list |
+| `GET`  | `/shorts/:shortId`  | Retrieve a short details  | short-details |
 | `GET`  | `/shorts/new-short`  | Uploading form | new-short-form |
 | `POST`  | `/shorts/new-short`  | Upload a new short  | short-details |
 | `GET`  | `/shorts/:shortId/edit`  | Editing form for a short, only if Creator, Admin, or CurrentUser  | edit-form |
 | `POST`  | `/shorts/:shortId/edit`  | Edit a short, only if Creator, Admin, or CurrentUser  | short-details |
 | `POST`  | `/movies/:shortId/delete`  | Delete a short, only if Admin, or CurrentUser  | shorts-list |
 | `POST`  | `/movies/:shortId/save`  | Save the short in the user's list  | next()
-| `POST`  | `/movies/:movieId/unsave`  | Delete the short from the user's list  | next()
+| `POST`  | `/movies/:shortId/unsave`  | Delete the short from the user's list  | next()
 | | | |
-| **POSTS**  |  | **folder: posts**  |
+| **POSTS**  | *done*  | **folder: posts**  |
 | `POST`  | `/posts/:movieOrShortId/new-post`  | Create a new post (comment, spoiler, summary)  | movie-details |
 | `GET`  | `/posts/:postId/edit`  | Form to edit a post (comment, spoiler, summary), only if Creator, Admin, or CurrentUser  | comment-edit-form |
 | `POST`  | `/posts/:postId/edit`  | Edit a post (comment, spoiler, summary), only if Creator, Admin, or CurrentUser  |  movie-details |
-| `POST`  | `/posts/:movieId/:postId/delete`  | Delete a post (comment, spoiler, summary), only if Admin, or CurrentUser  | movie-details |
+| `POST`  | `/posts/:postId/delete`  | Delete a post (comment, spoiler, summary), only if Admin, or CurrentUser  | movie-details |
 ||||
 | **PROFILE**  |  |  **folder: profile** |
 | `GET`  | `/users`  | Show all profiles  | profiles-list |
@@ -58,7 +59,7 @@ HOLA MIGUEL
 | **PROFILE** *messages*  |  |   |
 | `GET`  | `/:userId/messages`  | Retrieve user's received messages | messages |
 | `POST`  | `/:userId/new-message`  | Send a new message | 
-| `POST`  | `/:userId/:messageId/delete`  | Delete a message |
+| `POST`  | `/:messageId/delete`  | Delete a message |
 
 
 
