@@ -6,21 +6,21 @@ Expectation VS Reality
 | ----- | ------------- | ------------- | --------- |
 | `GET`  | `/`  | Index page  | index |
 | | |
-| **AUTH** | | folder: auth|
+| **AUTH** | | **folder: auth**|
 | `GET`  | `/register`  | Register form  | register-form |
 | `POST`  | `/register`  | Register succees/error  | index |
 | `GET`  | `/login`  | Login form  | login-form |
 | `POST`  | `/login`  | Login succees/error  | index |
 | `POST`  | `/logout`  | Logout of current user  | index |
 | | ||
-| **VALORATION BUTTONS** | | folder: ValorationButtons |
+| **VALORATION BUTTONS** | | **folder: ValorationButtons** |
 | `POST`  | `/:userId/like`  | Add +1 to the user's likes (only for logged in users) | next() |
 | `POST`  | `/:filmId/masterpiece`  | Mark a film as a *f------ masterpiece* (only for Creators or Admins) | next() |
 | `POST`  | `/:filmId/bullshit`  | Mark a film as a *bullshit* (only for Creators or Admins)  | next() |
 | `POST`  | `/:filmId/masterpieceOut`  | Unmark a film as a *f------ masterpiece* (only for Creators or Admins) | next() |
 | `POST`  | `/:filmId/bullshitOut`  | Unmark a film as a *bullshit* (only for Creators or Admins)  | next() |
 | | ||
-| **MOVIES**  |  | folder: movies   |
+| **MOVIES**  |  | **folder: movies**   |
 | `GET`  | `/movies`  | Retrieve all movies  | movies-list |
 | `POST`  | `/movies/search`  | Retrieve all movies that fit the searching  | movies-search-result |
 | `GET`  | `/movies/:movieId`  | Retrieve one single movie page  | movieId |
@@ -35,7 +35,7 @@ Expectation VS Reality
 | `GET`  | `/movies/masterpieces`  | Retrieve all movies marked as *f------ masterpiece* | masterpieces |
 | `GET`  | `/movies/bullshits`  | Retrieve all movies marked as *bullshit* | bullshits |
 ||||
-| **SHORTS**  |  | folder: shorts  |
+| **SHORTS**  |  | **folder: shorts**  |
 | `GET`  | `/shorts`  | Retrieve all shorts  | shorts-list |
 | `POST`  | `/shorts/search`  | Retrieve all shorts that fit the searching  | shorts-search-result |
 | `GET`  | `/shorts/new-short`  | Uploading form | new-short-form |
@@ -46,7 +46,7 @@ Expectation VS Reality
 | `POST`  | `/movies/:shortId/save`  | Save the short in the user's list  | next()
 | `POST`  | `/movies/:movieId/unsave`  | Delete the short from the user's list  | next()
 | | | |
-| **PROFILE**  |  |  folder: profile |
+| **PROFILE**  |  |  **folder: profile** |
 | `GET`  | `/users`  | Show all profiles  | profiles-list |
 | `GET`  | `/:userId`  | Show an user public profile  | userId |
 | `GET`  | `/:userId/edit`  | Edit the user profile (only the user's own profile) | edit-form |
