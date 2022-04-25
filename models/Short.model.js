@@ -19,7 +19,7 @@ const shortSchema = new Schema(
         required: true
     },
      genre: {
-        type: Array,
+        type: String,
         enum: ['DRAMA', 'COMEDY', 'ACTION', 'THRILLER', 'MUSICAL', 'HORROR', 'SCI-FI', 'WESTERN', 'DOCUMENTARY', 'ROMANCE', 'ADVENTURE', 'HISTORY', 'SPORTS', 'ANIMATION', 'EROTIC', 'NOIR', 'JC'],
         required: true
     }
