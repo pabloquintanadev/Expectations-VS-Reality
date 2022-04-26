@@ -13,7 +13,8 @@
                     <input type="summary" class="form-control" id="summary" name="summary">
                 </div>
                 <div class="mb-3">
-                    <select class="form-select" aria-label="Default select example">
+                    <label for="genre" class="form-label">Genre</label>
+                    <select class="form-select" aria-label="Default select example" id="genre" name="genre">
                         <option selected>Choose a genre</option>
                         <option value="DRAMA">Drama</option>
                         <option value="COMEDY">Comedy</option>
@@ -33,6 +34,10 @@
                         <option value="NOIR">Noir</option>
                         <option value="JC">JC</option>
                     </select>
+                </div>
+                <div class="mb-3">
+                    <label for="videoFile" class="form-label">Video</label>
+                        <input type="file" name="videoFile" class="form-control-file" id="videoFile" name"videoFile">
                 </div>
 
                 {{#if errorMessage}}
