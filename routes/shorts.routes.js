@@ -1,5 +1,7 @@
 const router = require("express").Router()
 
+const fileUploader = require("../config/cloudinary.config")
+
 const Message = require('./../models/Message.model')
 const Post = require('./../models/Post.model')
 const Short = require('./../models/Short.model')
@@ -32,12 +34,16 @@ router.get('/new-short', (req, res) => {
     res.render('shorts/new-short-form')
 })
 
-router.post('/new-short', (req, res) => {
+router.post('/new-short', fileUploader.single('videoFile'), (req, res) => {
+
+    const {title, summary, genre } = req.body
+    console.log(req.file)
+    const { path } = req.file
 
     Short
-        .create(req.body)
+        .create({title, summary, genre , videoFile: path})
         .then(newShort => res.redirect(`/shorts/details/${newShort._id}`))
-        .catch(err => console.log(err))
+        .catch(err => console.log('ERROR ----' ,err))
 })
 
 

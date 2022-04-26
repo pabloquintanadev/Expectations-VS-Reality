@@ -8,7 +8,12 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_SECRET
 });
 
-const storage = new CloudinaryStorage({cloudinary})
+const storage = new CloudinaryStorage({cloudinary, 
+  params: {
+    format: 'mp4',
+    resource_type: 'video'
+  }
+})
 
 //                     storage: storage
 module.exports = multer({ storage });
