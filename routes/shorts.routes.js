@@ -5,6 +5,8 @@ const Post = require('./../models/Post.model')
 const Short = require('./../models/Short.model')
 const User = require('./../models/User.model')
 
+
+
 router.get('/masterpieces', (req, res, next) => {
     res.render('shorts/masterpieces')
 })

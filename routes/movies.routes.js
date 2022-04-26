@@ -8,23 +8,30 @@ const User = require('./../models/User.model')
 const APIHandler = require('./../public/js/APIHandler')
 const imdb = new APIHandler()
 
+const { isLoggedOut, isLoggedIn } = require('./../middleware/route-guard')
+
 router.post('/search', (req, res) => {
 
     imdb
         .getDetails(req.body.title)
-    // .then(movie => {
-    //     console.log(movie)
+        .then(({ data }) => { res.render('movies/search-list', { movies: data.results }) })
+        .catch(err => console.log(err))
+})
 
-    //     // res.render('/movies/movie-details', movie)
-    // })
-    //     .catch(err => console.log(err))
+router.get('/details/:movieId', (req, res) => {
+
+    imdb
+        .getTrailer(req.params.movieId)
+        // .then(movie => console.log(movie))
+        .then(({ data }) => res.render('movies/movie-details', data))
+        .catch(err => console.log(err))
+
 })
 
 router.post('/:movieId/save', (req, res) => {
-    const { id } = req.params
     User
         .findById(req.session.currentUser.id)
-        .then(user => user.savedMovies.push(id))
+        .then(user => user.savedMovies.push(req.params.movieId))
         .catch(err => console.log(err))
 
 
@@ -36,8 +43,8 @@ router.post('/:movieId/unsave', (req, res) => {
     User
         .findById(req.session.currentUser.id)
         .then(user => {
-            if (user.savedMovies.includes(id)) {
-                user.savedMovies.splice(user.savedMovies.indexOf(id), 1)
+            if (user.savedMovies.includes(req.params.movieId)) {
+                user.savedMovies.splice(user.savedMovies.indexOf(req.params.movieId), 1)
             }
         }
         )
