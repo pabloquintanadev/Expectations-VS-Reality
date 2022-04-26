@@ -44,11 +44,26 @@ router.get('/details/:movieId', (req, res) => {
 })
 
 router.post('/:movieId/save', (req, res) => {
-    User
-        .findById(req.session.currentUser._id)
-        .then(user => user.savedMovies.push(`${req.params.movieId}`))
-        .then(user => res.redirect(`movies/details/${req.params.movieId}`))
-        .catch(err => console.log(err))
+
+    // console.log(req.session.currentUser)
+    // console.log(req.params)
+    const { movieId } = req.params
+    // console.log(movieId)
+
+    console.log(movieId + 'HOLAAAAAAAAA' + req.session.currentUser.savedMovies)
+
+
+
+    if (req.session.currentUser.savedMovies.includes(movieId, 0)) {
+        res.redirect(`/`)
+    } else {
+        User
+            .findById(req.session.currentUser._id)
+            .update({ $push: { savedMovies: movieId } })
+            .then(() => res.redirect(`/movies/details/${movieId}`))
+            .catch(err => console.log(err))
+    }
+
 
 
 })
