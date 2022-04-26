@@ -3,7 +3,7 @@
         <div class="col-md-5">
             <h1>Register</h1>
             <hr>
-            <form action="/auth/register" method="POST">
+            <form action="/auth/register" method="POST" enctype="multipart/form-data">
                 <div class="mb-3">
                     <label for="name" class="form-label">Name</label>
                     <input type="text" class="form-control" id="name" name="name">
@@ -23,6 +23,10 @@
                 <div class="mb-3">
                     <label for="password" class="form-label">Password</label>
                     <input type="password" class="form-control" id="password" name="plainPassword">
+                </div>
+                <div class="mb-3">
+                    <label for="profileImage" class="form-label">Profile picture</label>
+                        <input type="file" class="form-control-file" id="profileImage" name="profileImage">
                 </div>
 
 

@@ -17,7 +17,7 @@ router.get('/list', (req, res, next) => {
 
 
 router.get('/:userId', (req, res, next) => {
-
+    
     User
         .findById(req.params)
         .then(user => res.render('profile/user-details', user))

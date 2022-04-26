@@ -10,8 +10,8 @@ cloudinary.config({
 
 const storage = new CloudinaryStorage({cloudinary, 
   params: {
-    format: 'mp4',
-    resource_type: 'video'
+    allowed_formats: ['mp4', 'jpg', 'png'],
+    resource_type: 'auto'
   }
 })
 
