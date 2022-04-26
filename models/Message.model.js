@@ -4,7 +4,6 @@ const messageSchema = new Schema(
   {
     from: {
       type: String,
-      required: true
     },
     to: {
       type: String,
@@ -12,7 +11,6 @@ const messageSchema = new Schema(
     },
     textContent: {
       type: String,
-      required: true
     },
     likesCounter: {
       type: Number,
