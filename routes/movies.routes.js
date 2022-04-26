@@ -21,17 +21,19 @@ router.post('/search', (req, res) => {
 router.get('/details/:movieId', (req, res) => {
 
 
+
     const { movieId } = req.params
 
     const promises = [
-        imdb.getTrailer(req.params.movieId),
-        Post.find({ movieOrShortId: movieId })
+        imdb.getTrailer(movieId),
+        Post.find({ movieOrShortId: movieId, type: 'COMMENT' }),
+        Post.find({ movieOrShortId: movieId, type: 'SPOILER' })
     ]
 
     Promise
         .all(promises)
-        .then(([movieInfo, comments]) => {
-            const viewData = { movieInfo: movieInfo.data, comments }
+        .then(([movieInfo, comments, spoilers]) => {
+            const viewData = { movieInfo: movieInfo.data, comments, spoilers }
             res.render('movies/movie-details', viewData)
         })
         .catch(err => console.log(err))
@@ -43,8 +45,9 @@ router.get('/details/:movieId', (req, res) => {
 
 router.post('/:movieId/save', (req, res) => {
     User
-        .findById(req.session.currentUser.id)
-        .then(user => user.savedMovies.push(req.params.movieId))
+        .findById(req.session.currentUser._id)
+        .then(user => user.savedMovies.push(`${req.params.movieId}`))
+        .then(user => res.redirect(`movies/details/${req.params.movieId}`))
         .catch(err => console.log(err))
 
 
@@ -52,7 +55,7 @@ router.post('/:movieId/save', (req, res) => {
 
 router.post('/:movieId/unsave', (req, res) => {
 
-    const { id } = req.params
+
     User
         .findById(req.session.currentUser.id)
         .then(user => {
