@@ -24,8 +24,7 @@ router.post('/:movieOrShortId/new-post', (req, res) => {
     // console.log(req.session.currentUser)
     Post
         .create({ author, textContent, type, movieOrShortId })
-
-
+        .then(() => res.redirect(`/movies/details/${movieOrShortId}`))
         .catch(err => console.log(err))
 
 

@@ -1,8 +1,8 @@
 <div class="card mb-3">
     <div class="card-body">
-        <h5 class="card-title"><strong>{{movie.title}}</strong> from <i>{{year}}</h5>
-        <p class="card-text">{{movie.videoDescription}}</p>
-        <iframe width="560" height="315" src="{{movie.linkEmbed}}" frameborder="0"
+        <h5 class="card-title"><strong>{{movieInfo.title}}</strong> from <i>{{movieInfo.year}}</h5>
+        <p class="card-text">{{movieInfo.videoDescription}}</p>
+        <iframe width="560" height="315" src="{{movieInfo.linkEmbed}}" frameborder="0"
             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
     </div>
@@ -16,7 +16,7 @@
 
 
 
-<form action="/posts/{{movie.imDbId}}/new-post" method="POST">
+<form action="/posts/{{movieInfo.imDbId}}/new-post" method="POST">
     <div class="mb-3">
         <h3>COMENTARIO</h3>
     </div>

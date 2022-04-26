@@ -20,23 +20,24 @@ router.post('/search', (req, res) => {
 
 router.get('/details/:movieId', (req, res) => {
 
-    const datos = {}
 
     const { movieId } = req.params
 
-    imdb
-        .getTrailer(req.params.movieId)
-        // .then(movie => console.log(movie))
-        .then(({ data }) => {
-            datos.movie = data;
-            return Post.find({ movieOrShortId: movieId })
-        })
-        .then(comments => {
-            datos.comments = comments
-            // console.log(datos)
-            res.render('movies/movie-details', datos)
+    const promises = [
+        imdb.getTrailer(req.params.movieId),
+        Post.find({ movieOrShortId: movieId })
+    ]
+
+    Promise
+        .all(promises)
+        .then(([movieInfo, comments]) => {
+            const viewData = { movieInfo: movieInfo.data, comments }
+            res.render('movies/movie-details', viewData)
         })
         .catch(err => console.log(err))
+
+
+
 
 })
 
