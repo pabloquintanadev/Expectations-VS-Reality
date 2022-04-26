@@ -11,11 +11,13 @@ const imdb = new APIHandler()
 router.post('/search', (req, res) => {
 
     imdb
-        .getDetails(req.body)
-        .then(movie => {
-            res.render('/movies/movie-details', movie)
-        })
-        .catch(err => console.log(err))
+        .getDetails(req.body.title)
+    // .then(movie => {
+    //     console.log(movie)
+
+    //     // res.render('/movies/movie-details', movie)
+    // })
+    //     .catch(err => console.log(err))
 })
 
 router.post('/:movieId/save', (req, res) => {

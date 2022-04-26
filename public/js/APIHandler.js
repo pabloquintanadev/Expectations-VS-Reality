@@ -12,10 +12,13 @@ class APIHandler {
 
 
     //get movie details
-    getDetails(movieTitle) {
-        const movie = this.axiosApp.get(`https://imdb-api.com/en/API/SearchTitle/k_re2pw0li/${movieTitle}`)
-        const { imDbId } = movie
-        return this.axiosApp.get(`/en/API/Trailer/k_re2pw0li/${imDbId}`)
+    getDetails(movie) {
+        console.log('LA BUSQUEDA SOBRE:' + movie)
+        const search = this.axiosApp.get(`https://imdb-api.com/en/API/SearchTitle/k_re2pw0li/${movie}`)
+        const { results } = search
+        console.log('LOS RESULTADOS SON' + search[0])
+        // const { imDbId } = foundMovie
+        // return this.axiosApp.get(`/en/API/Trailer/k_re2pw0li/${imDbId}`)
     }
 }
 
