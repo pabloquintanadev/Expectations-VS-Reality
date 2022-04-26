@@ -9,7 +9,8 @@
                     {{!-- SUMMARY --}}
                     <p class="card-text">{{summary}}</p>
                     {{!-- SHORT DISPLAY + DETAILS --}}
-                    <a href="/shorts/details/{{id}}/" class="btn btn-outline-primary">
+                    <div class="container d-flex flex-row justify-content-evenly">
+                    <a href="/shorts/details/{{id}}/" class="btn btn-outline-primary btn-md px-3">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             class="bi bi-play-fill" viewBox="0 0 16 16">
                             <path
@@ -17,7 +18,7 @@
                         </svg>
                     </a>
                     <form action="/shorts/delete/{{id}}/" method="POST">
-                        <button class="btn btn-outline-danger btn-md px-4" type="submit">
+                        <button class="btn btn-outline-danger btn-md px-3" type="submit">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                 class="bi bi-trash" viewBox="0 0 16 16">
                                 <path
@@ -27,6 +28,7 @@
                             </svg>
                         </button>
                     </form>
+                    </div>
                 </div>
             </div>
         </div>
