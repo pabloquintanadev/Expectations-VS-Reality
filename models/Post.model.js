@@ -11,7 +11,7 @@ const postSchema = new Schema(
     },
     type: {
       type: String,
-      enum: ['SUMMARY', 'COMMENTS', 'SPOILERS']
+      enum: ['COMMENTS', 'SPOILERS']
     },
     movieOrShortId: {
       type: String

@@ -1,5 +1,7 @@
 const axios = require('axios')
 
+const APIKey = 'k_re2pw0li'
+
 class APIHandler {
     constructor() {
         this.axiosApp = axios.create({
@@ -13,13 +15,14 @@ class APIHandler {
 
     //get movie details
     getDetails(movie) {
-        console.log('LA BUSQUEDA SOBRE:' + movie)
-        const search = this.axiosApp.get(`https://imdb-api.com/en/API/SearchTitle/k_re2pw0li/${movie}`)
-        const { results } = search
-        console.log('LOS RESULTADOS SON' + search[0])
-        // const { imDbId } = foundMovie
-        // return this.axiosApp.get(`/en/API/Trailer/k_re2pw0li/${imDbId}`)
+        return this.axiosApp.get(`https://imdb-api.com/en/API/SearchTitle/${APIKey}/${movie}`)
     }
+
+    getTrailer(movieId) {
+        return this.axiosApp.get(`https://imdb-api.com/en/API/Trailer/${APIKey}/${movieId}`)
+    }
+
+
 }
 
 module.exports = APIHandler
