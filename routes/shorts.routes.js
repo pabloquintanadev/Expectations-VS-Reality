@@ -34,22 +34,19 @@ router.get('/new-short', (req, res) => {
 
 router.post('/new-short', (req, res) => {
 
-
     Short
         .create(req.body)
-        .then(newShort => {
-            res.redirect(`/shorts/details/${newShort._id}`)
-        })
+        .then(newShort => res.redirect(`/shorts/details/${newShort._id}`))
         .catch(err => console.log(err))
 })
 
 
 router.get('/details/:shortId', (req, res) => {
 
-    const { id } = req.params
+    // // const { id } = req.params
 
     Short
-        .findById(id)
+        .findById(req.params.shortId)
         .populate('author')
         .then(short => {
             res.render('shorts/short-details', short)
@@ -61,10 +58,10 @@ router.get('/details/:shortId', (req, res) => {
 
 router.get('/edit/:shortId', (req, res) => {
 
-    const { id } = req.params
+
 
     Short
-        .findById(id)
+        .findById(req.params.shortId)
         .then(short => {
             res.render('shorts/edit-form', short)
         })
@@ -73,12 +70,12 @@ router.get('/edit/:shortId', (req, res) => {
 
 router.post('/edit/:shortId', (req, res) => {
 
-    const { id } = req.params
+
 
     Short
-        .findByIdAndUpdate(id, req.body)
+        .findByIdAndUpdate(req.params.shortId, req.body)
         .then(short => {
-            res.redirect(`/shorts/${newShort._id}`)
+            res.redirect(`/shorts/details/${short._id}`)
         })
         .catch(err => console.log(err))
 })
@@ -90,7 +87,7 @@ router.post('/delete/:shortId/', (req, res) => {
     // const { id } = req.params
 
     Short
-        .findOneAndDelete(req.params._id)
+        .findOneAndDelete(req.params.shortId)
         .then(() => {
             res.redirect('/shorts')
         })
@@ -100,10 +97,9 @@ router.post('/delete/:shortId/', (req, res) => {
 // SAVE/UNSAVE
 
 router.post('/:shortId/save', (req, res) => {
-    const { id } = req.params
     User
-        .findById(req.session.currentUser.id)
-        .then(user => user.savedShorts.push(id))
+        .findById(req.session.currentUser._id)
+        .then(user => user.savedShorts.push(req.params.shortId))
         .catch(err => console.log(err))
 
 
@@ -111,12 +107,11 @@ router.post('/:shortId/save', (req, res) => {
 
 router.post('/:shortId/unsave', (req, res) => {
 
-    const { id } = req.params
     User
-        .findById(req.session.currentUser.id)
+        .findById(req.session.currentUser._id)
         .then(user => {
-            if (user.savedShorts.includes(id)) {
-                user.savedShorts.splice(user.savedShorts.indexOf(id), 1)
+            if (user.savedShorts.includes(req.params.shortId)) {
+                user.savedShorts.splice(user.savedShorts.indexOf(req.params.shortId), 1)
             }
         }
         )

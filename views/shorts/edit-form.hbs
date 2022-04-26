@@ -3,7 +3,7 @@
         <div class="col-md-5">
             <h1>Update {{title}} by {{author}}</h1>
             <hr>
-            <form action="/shorts/{{id}}/edit" method="POST">
+            <form action="/shorts/edit/{{id}}" method="POST">
                 <div class="mb-3">
                     <label for="title" class="form-label">title</label>
                     <input type="title" class="form-control" id="title" name="title" value="{{title}}">
@@ -14,7 +14,7 @@
                 </div>
                 <div class="mb-3">
                     <select class="form-select" aria-label="Default select example">
-                        <option selected>Choose a genre</option>
+                        <option selected>{{genre}}</option>
                         <option value="DRAMA">Drama</option>
                         <option value="COMEDY">Comedy</option>
                         <option value="ACTION">Action</option>

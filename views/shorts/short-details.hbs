@@ -1,9 +1,15 @@
+HOLAAAA?? {{title}}
+
+autor: {{author}}
+
 <div class="card mb-3">
-  <video src="..." class="card-img-top" alt="...">
-  <div class="card-body">
-    <h5 class="card-title"><strong>{{title}}</strong> by <i>{{author}}</h5>
-    <p class="card-text">{{summary}}</p>
-    {{!-- LE PODEMOS METER FECHA DE CREACION Y UPDATE???????????'' --}}
-    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-  </div>
+  {{!-- <video src="..." class="card-img-top" alt="..."> --}}
+    <div class="card-body">
+      <h5 class="card-title"><strong>{{title}}</strong> by <i>{{author}}</h5>
+      <p class="card-text">{{summary}}</p>
+
+      <a href="/shorts/edit/{{id}}">EDITAR</a>
+      {{!-- LE PODEMOS METER FECHA DE CREACION Y UPDATE???????????'' --}}
+      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+    </div>
 </div>
