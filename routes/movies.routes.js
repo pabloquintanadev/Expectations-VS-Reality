@@ -43,46 +43,42 @@ router.get('/details/:movieId', (req, res) => {
 
 })
 
+// EL SAVE FUNCIONA PERO SE REPITEN. EL UNSAVE NI DE FLAIS
+
 router.post('/:movieId/save', (req, res) => {
 
-    // console.log(req.session.currentUser)
-    // console.log(req.params)
     const { movieId } = req.params
-    // console.log(movieId)
 
     console.log(movieId + 'HOLAAAAAAAAA' + req.session.currentUser.savedMovies)
 
-
-
-    if (req.session.currentUser.savedMovies.includes(movieId, 0)) {
-        res.redirect(`/`)
-    } else {
-        User
-            .findById(req.session.currentUser._id)
-            .update({ $push: { savedMovies: movieId } })
-            .then(() => res.redirect(`/movies/details/${movieId}`))
-            .catch(err => console.log(err))
-    }
-
-
-
-})
-
-router.post('/:movieId/unsave', (req, res) => {
-
-
     User
-        .findById(req.session.currentUser.id)
-        .then(user => {
-            if (user.savedMovies.includes(req.params.movieId)) {
-                user.savedMovies.splice(user.savedMovies.indexOf(req.params.movieId), 1)
-            }
-        }
-        )
+        .findById(req.session.currentUser._id)
+        .update({ $addToSet: { savedMovies: movieId } })
+        .then(() => res.redirect(`/movies/details/${movieId}`))
         .catch(err => console.log(err))
 
 
+
+
 })
+
+// router.post('/:movieId/unsave', (req, res) => {
+
+//     const { movieId } = req.params
+
+//     User
+//         .findById(req.session.currentUser.id)
+//         .then(user => {
+
+//             user.savedMovies.splice(user.savedMovies.indexOf(movieId), 1)
+
+//         }
+//         )
+//         .then(() => res.redirect(`/movies/details/${movieId}`))
+//         .catch(err => console.log(err))
+
+
+// })
 
 
 

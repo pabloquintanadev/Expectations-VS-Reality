@@ -17,10 +17,12 @@ router.get('/list', (req, res, next) => {
 
 
 router.get('/:userId', (req, res, next) => {
-    
+
+    const { userId } = req.params
+
     User
-        .findById(req.params)
-        .then(user => res.render('profile/user-details', user))
+        .findById(userId)
+        .then(user => res.render('profile/details', user))
         .catch(err => console.log(err))
 })
 
