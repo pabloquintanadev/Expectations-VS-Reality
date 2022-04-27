@@ -8,6 +8,9 @@ const User = require('./../models/User.model')
 const APIHandler = require('./../public/js/APIHandler')
 const imdb = new APIHandler()
 
+
+//USERS LIST (needed?)
+
 router.get('/list', (req, res, next) => {
     User
         .find()
@@ -18,6 +21,7 @@ router.get('/list', (req, res, next) => {
 })
 
 
+//PROFILE PAGE
 
 router.get('/details/:userId', (req, res, next) => {
 
@@ -29,6 +33,9 @@ router.get('/details/:userId', (req, res, next) => {
         .catch(err => console.log(err))
 })
 
+
+//OWN PROFILE PAGE
+
 router.get('/myprofile', (req, res, next) => {
 
     const { _id } = req.session.currentUser
@@ -39,28 +46,30 @@ router.get('/myprofile', (req, res, next) => {
         .catch(err => console.log(err))
 })
 
+
 //EDIT
 
-router.get('/:userId/edit', (req, res) => {
+router.get('/edit/:userId', (req, res) => {
 
-    const { id } = req.params
+    const { userId } = req.params
 
     User
-        .findById(id)
+        .findById(userId)
         .then(user => {
             res.render('profile/edit-form', user)
         })
         .catch(err => console.log(err))
 })
 
-router.post('/:userId/edit', (req, res) => {
+router.post('/edit/:userId', (req, res) => {
 
-    const { id } = req.params
+    const { userId } = req.params
+
 
     User
-        .findByIdAndUpdate(id, req.body)
-        .then(user => {
-            res.redirect(`/user/${user._id}`)
+        .findByIdAndUpdate(userId, req.body)
+        .then(() => {
+            res.redirect(`/profile/myprofile/`)
         })
         .catch(err => console.log(err))
 })
@@ -84,30 +93,15 @@ router.get('/inbox', (req, res) => {
 router.get('/saved-movies', (req, res) => {
 
     const { savedMovies } = req.session.currentUser
-    // const savedMoviesArr = [...savedMovies]
 
-    const movieSavedArr = []
-
-    console.log(savedMovies + 'HOLAAAA')
-
-    savedMovies.forEach(movie => {
-
-        movieSavedArr.push(imdb.getTrailer(movie))
+    const movieSavedArr = savedMovies.map(movie => imdb.getTrailer(movie))
 
 
-    });
 
     Promise
         .all(movieSavedArr)
-        .then(responses => res.render('profile/saved-movies', { responses })
-        )
+        .then(responses => res.render('profile/saved-movies', { responses }))
         .catch(err => console.log(err))
-
-
-
-
-
-
 
 })
 
@@ -124,20 +118,9 @@ router.get('/saved-movies', (req, res) => {
 //         })
 //         .catch(err => console.log(err))
 // })
+
+
 // //SAVED SHORTS
-
-// router.get('/:userId/edit', (req, res) => {
-
-//     const { id } = req.params
-
-//     User
-//         .findById(id)
-//         .then(user => {
-//             res.render('profile/edit-form', user)
-//         })
-//         .catch(err => console.log(err))
-// })
-// //SAVED FILMS
 
 // router.get('/:userId/edit', (req, res) => {
 

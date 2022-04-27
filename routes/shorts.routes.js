@@ -8,7 +8,7 @@ const Short = require('./../models/Short.model')
 const User = require('./../models/User.model')
 
 
-// CRUD
+// CRUD ---
 
 router.get('/', (req, res) => {
 
@@ -41,9 +41,10 @@ router.post('/new-short', fileUploader.single('videoFile'), (req, res) => {
 })
 
 
-router.get('/details/:shortId', (req, res) => {
+// SHORT DETAILS
 
-    // // const { id } = req.params
+
+router.get('/details/:shortId', (req, res) => {
 
     Short
         .findById(req.params.shortId)
@@ -54,11 +55,11 @@ router.get('/details/:shortId', (req, res) => {
         .catch(err => console.log(err))
 })
 
-//EDIT
+
+
+//SHORT EDIT
 
 router.get('/edit/:shortId', (req, res) => {
-
-
 
     Short
         .findById(req.params.shortId)
@@ -70,8 +71,6 @@ router.get('/edit/:shortId', (req, res) => {
 
 router.post('/edit/:shortId', (req, res) => {
 
-
-
     Short
         .findByIdAndUpdate(req.params.shortId, req.body)
         .then(short => {
@@ -80,11 +79,12 @@ router.post('/edit/:shortId', (req, res) => {
         .catch(err => console.log(err))
 })
 
-// DELETE
+
+
+
+// DELETE A SHORT
 
 router.post('/delete/:shortId/', (req, res) => {
-
-    // const { id } = req.params
 
     Short
         .findOneAndDelete(req.params.shortId)
@@ -94,9 +94,7 @@ router.post('/delete/:shortId/', (req, res) => {
         .catch(err => console.log(err))
 })
 
-// SAVE/UNSAVE
-
-// ESTE SAVE??? HOLA?
+// SAVE (to do!!!)
 
 router.post('/:shortId/save', (req, res) => {
 
@@ -112,21 +110,7 @@ router.post('/:shortId/save', (req, res) => {
 
 })
 
-// router.post('/:shortId/unsave', (req, res) => {
 
-//     User
-//         .findById(req.session.currentUser._id)
-//         .then(user => {
-//             if (user.savedShorts.includes(req.params.shortId)) {
-//                 user.savedShorts.splice(user.savedShorts.indexOf(req.params.shortId), 1)
-//             }
-//         }
-//         )
-//         .catch(err => console.log(err))
-
-// })
-
-//___________________
 
 //MASTERPIECE AND BULLSHIT LISTS
 
@@ -137,8 +121,6 @@ router.get('/masterpieces', (req, res, next) => {
         // .then(e => console.log(e))
         .then(masterpieces => res.render('shorts/masterpieces', { masterpieces }))
         .catch(err => console.log(err))
-
-
 
 })
 
@@ -161,11 +143,7 @@ router.post('/like/:userId/:shortId', (req, res, next) => {
         .findByIdAndUpdate(userId, { $inc: { likesCounter: 1 } })
         .then(() => res.redirect(`/shorts/details/${shortId}`))
         .catch(err => console.log(err))
-
 })
-
-
-
 
 
 module.exports = router

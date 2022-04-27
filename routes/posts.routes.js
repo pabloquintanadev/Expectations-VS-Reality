@@ -11,6 +11,9 @@ const imdb = new APIHandler()
 
 //POSTS
 
+
+//NEW POST
+
 router.post('/:movieOrShortId/new-post', (req, res) => {
 
     const author = req.session.currentUser
@@ -22,46 +25,51 @@ router.post('/:movieOrShortId/new-post', (req, res) => {
         .then(() => res.redirect(`/movies/details/${movieOrShortId}`))
         .catch(err => console.log(err))
 
-
 })
 
-router.get('/:postId/edit', (req, res) => {
+// //EDIT A POST
 
-    const { post_id } = req.params
+
+// router.get('/edit/:postId', (req, res) => {
+
+//     const { post_id } = req.params
+
+//     Post
+//         .findById(post_id)
+//         .then(post => {
+//             res.render('posts/edit-form', post)
+//         })
+//         .catch(err => console.log(err))
+// })
+
+// router.post('/edit/:postId', (req, res) => {
+
+//     const { post_id } = req.params
+
+//     Post
+//         .findByIdAndUpdate(post_id, req.body)
+//         .find({ movieOrShortId: id })
+//         .then(post => {
+//             if (isShort) {
+//                 res.render(`shorts/${movieOrShortId}/short-details`, post)
+//             } else {
+//                 res.render(`/movies/${movieOrShortId}/movie-details`, post)
+//             }
+//         })
+//         .catch(err => console.log(err))
+// })
+
+
+// DELETE A POST
+
+router.post('/:postId/delete/:movieId', (req, res) => {
+
+    const { postId, movieId } = req.params
 
     Post
-        .findById(post_id)
-        .then(post => {
-            res.render('posts/comment-edit-form', post)
-        })
-        .catch(err => console.log(err))
-})
-
-router.post('/:postId/edit', (req, res) => {
-
-    const { post_id } = req.params
-
-    Post
-        .findByIdAndUpdate(post_id, req.body)
-        .find({ movieOrShortId: id })
-        .then(post => {
-            if (isShort) {
-                res.render(`shorts/${movieOrShortId}/short-details`, post)
-            } else {
-                res.render(`/movies/${movieOrShortId}/movie-details`, post)
-            }
-        })
-        .catch(err => console.log(err))
-})
-
-router.post('/:postId/delete', (req, res) => {
-
-    const { id } = req.params
-
-    Post
-        .findByIdAndDelete(id)
+        .findByIdAndDelete(postId)
         .then(() => {
-            next()
+            res.redirect(`/movies/details/${movieId}`)
         })
         .catch(err => console.log(err))
 })

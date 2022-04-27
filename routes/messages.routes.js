@@ -17,15 +17,13 @@ const { isLoggedOut, isLoggedIn } = require('./../middleware/route-guard')
 router.post('/:destId/new-message', (req, res) => {
 
     const origin = req.session.currentUser._id
-    let destination = req.params.destId
+    const destination = req.params.destId
     const { textContent } = req.body
 
     Message
         .create({ origin, destination, textContent })
         .then(() => res.redirect(`/profile/details/${destination}`))
-        .catch(err => console.log(err))
-
-
+        .catch(err => next(err))
 })
 
 //ANSWER A MESSAGE
@@ -40,8 +38,6 @@ router.post('/:destId/message-answer', (req, res) => {
         .create({ origin, destination, textContent })
         .then(() => res.redirect(`/profile/inbox`))
         .catch(err => console.log(err))
-
-
 })
 
 
@@ -56,14 +52,5 @@ router.post('/:messageId/delete', (req, res) => {
         .then(() => res.redirect(`/profile/inbox`))
         .catch(err => console.log(err))
 })
-
-
-
-
-
-
-
-
-
 
 module.exports = router

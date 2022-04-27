@@ -1,0 +1,21 @@
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-5">
+            <h1>Update profile</h1>
+            <hr>
+            <form action="/profile/edit/{{id}}" method="POST">
+                <div class="mb-3">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" class="form-control" id="username" name="username" value="{{username}}">
+                </div>
+
+
+
+                {{#if errorMessage}}
+                <div id="error">{{errorMessage}}</div>
+                {{/if}}
+                <button type="submit" class="btn btn-dark">Log in</button>
+            </form>
+        </div>
+    </div>
+</div>

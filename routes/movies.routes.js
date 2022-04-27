@@ -10,6 +10,8 @@ const imdb = new APIHandler()
 
 const { isLoggedOut, isLoggedIn } = require('./../middleware/route-guard')
 
+//SEARCH
+
 router.post('/search', (req, res) => {
 
     imdb
@@ -18,16 +20,19 @@ router.post('/search', (req, res) => {
         .catch(err => console.log(err))
 })
 
+
+// SINGLE MOVIE PAGE
+
 router.get('/details/:movieId', (req, res) => {
-
-
 
     const { movieId } = req.params
 
     const promises = [
         imdb.getTrailer(movieId),
-        Post.find({ movieOrShortId: movieId, type: 'COMMENT' }),
+        Post.find({ movieOrShortId: movieId, type: 'COMMENT' })
+            .populate('author'),
         Post.find({ movieOrShortId: movieId, type: 'SPOILER' })
+            .populate('author'),
     ]
 
     Promise
@@ -36,52 +41,20 @@ router.get('/details/:movieId', (req, res) => {
             const viewData = { movieInfo: movieInfo.data, comments, spoilers }
             res.render('movies/movie-details', viewData)
         })
-        .catch(err => console.log(err))
-
-
-
-
+        .catch(err => next(err))
 })
 
-// EL SAVE FUNCIONA PERO SE REPITEN. EL UNSAVE NI DE FLAIS
+// SAVE A MOVIE
 
 router.post('/:movieId/save', (req, res) => {
 
     const { movieId } = req.params
-
-    console.log(movieId + 'HOLAAAAAAAAA' + req.session.currentUser.savedMovies)
 
     User
         .findById(req.session.currentUser._id)
         .update({ $addToSet: { savedMovies: movieId } })
         .then(() => res.redirect(`/movies/details/${movieId}`))
         .catch(err => console.log(err))
-
-
-
-
 })
-
-// router.post('/:movieId/unsave', (req, res) => {
-
-//     const { movieId } = req.params
-
-//     User
-//         .findById(req.session.currentUser.id)
-//         .then(user => {
-
-//             user.savedMovies.splice(user.savedMovies.indexOf(movieId), 1)
-
-//         }
-//         )
-//         .then(() => res.redirect(`/movies/details/${movieId}`))
-//         .catch(err => console.log(err))
-
-
-// })
-
-
-
-
 
 module.exports = router
