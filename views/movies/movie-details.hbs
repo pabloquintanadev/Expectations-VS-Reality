@@ -1,48 +1,80 @@
 <div class="card mb-3">
     <div class="card-body">
-        <h5 class="card-title"><strong>{{movieInfo.title}}</strong> from <i>{{movieInfo.year}}</h5>
-        <p class="card-text">{{movieInfo.videoDescription}}</p>
-        <iframe width="560" height="315" src="{{movieInfo.linkEmbed}}" frameborder="0"
+        <div class="container mb-3">
+            <div class="row">
+                <div class="col-md-10">
+                    <iframe width="900" height="315" src="{{movieInfo.linkEmbed}}" frameborder="0"
             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                </div>
+                <div class="col-md-2">
+                    <p class="card-text">
+                        <strong>Summary:</strong>
+                        <br>
+                        {{movieInfo.videoDescription}}
+                        <br>
+                        <div class="container d-flex flex-row justify-content-evenly">
+                        <form action="/movies/{{movieInfo.imDbId}}/save" method="POST">
+                            <button class="btn btn-outline-success btn-md" type="submit">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bookmark-star" viewBox="0 0 16 16">
+                                    <path d="M7.84 4.1a.178.178 0 0 1 .32 0l.634 1.285a.178.178 0 0 0 .134.098l1.42.206c.145.021.204.2.098.303L9.42 6.993a.178.178 0 0 0-.051.158l.242 1.414a.178.178 0 0 1-.258.187l-1.27-.668a.178.178 0 0 0-.165 0l-1.27.668a.178.178 0 0 1-.257-.187l.242-1.414a.178.178 0 0 0-.05-.158l-1.03-1.001a.178.178 0 0 1 .098-.303l1.42-.206a.178.178 0 0 0 .134-.098L7.84 4.1z"/>
+                                    <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z"/>
+                                </svg>
+                            </button>
+                        </form>
+
+                        <form action="/movies/{{movieInfo.imDbId}}/unsave" method="POST">
+                            <button class="btn btn-outline-danger btn-md" type="submit">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bookmark-star" viewBox="0 0 16 16">
+                                    <path d="M7.84 4.1a.178.178 0 0 1 .32 0l.634 1.285a.178.178 0 0 0 .134.098l1.42.206c.145.021.204.2.098.303L9.42 6.993a.178.178 0 0 0-.051.158l.242 1.414a.178.178 0 0 1-.258.187l-1.27-.668a.178.178 0 0 0-.165 0l-1.27.668a.178.178 0 0 1-.257-.187l.242-1.414a.178.178 0 0 0-.05-.158l-1.03-1.001a.178.178 0 0 1 .098-.303l1.42-.206a.178.178 0 0 0 .134-.098L7.84 4.1z"/>
+                                    <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z"/>
+                                </svg>
+                            </button>
+                        </form>
+                    </div>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5 class="card-title mb-3"><strong>{{movieInfo.title}}</strong></h5>
+                    <p class="card-text"><small class="text-muted">Release year: <i>{{movieInfo.year}}</small></p>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
-<form action="/movies/{{movieInfo.imDbId}}/save" method="POST">
-    <button class="btn btn-outline-danger btn-md px-3" type="submit">
-        SAVE
-    </button>
-</form>
-
-<form action="/movies/{{movieInfo.imDbId}}/unsave" method="POST">
-    <button class="btn btn-outline-danger btn-md px-3" type="submit">
-        UNSAVE
-    </button>
-</form>
-
-{{!-- {{#each comments}}
-
-{{textContent}}
-
-{{/each}} --}}
-
-
 
 <form action="/posts/{{movieInfo.imDbId}}/new-post" method="POST">
+<div class="mb-3">
     <div class="mb-3">
-        <h3>COMENTARIO</h3>
-    </div>
-    <div class="mb-3">
-        <label for="textContent" class="form-label">Escribe aquí tu comentario</label>
-        <textarea class="form-control" id="textContent" rows="3" name="textContent"></textarea>
+        <label for="textContent" class="form-label"></label>
+        <textarea class="form-control" id="textContent" rows="3" name="textContent" placeholder="Comment something or protect other users from spoilers"></textarea>
     </div>
     <input id="isShort" name="isShort" type="hidden" value="false">
-    <input id="type" name="type" type="hidden" value="COMMENT">
+    {{!-- <input id="type" name="type" type="hidden" value="COMMENT"> --}}
 
     {{#if errorMessage}}
     <div id="error">{{errorMessage}}</div>
     {{/if}}
-    <button type="submit" class="btn btn-dark">Enviar Comentario</button>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2">
+                <button type="submit" class="btn btn-dark">Send Post</button>
+            </div>
+            <div class="col-md-8"></div>
+            <div class="col-md-2">
+                <select class="form-select" aria-label="Default select example">
+                    <option selected>Type of post</option>
+                    <option value="COMMENT" id="type" name="type">Comment</option>
+                    <option value="SPOILER" id="type" name="type">Spoiler</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    </div>
 </form>
 
 <div class="accordion" id="accordionPanelsStayOpenExample">
@@ -51,7 +83,7 @@
             <button class="accordion-button" type="button" data-bs-toggle="collapse"
                 data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
                 aria-controls="panelsStayOpen-collapseOne">
-                Accordion Item #1
+                Comments
             </button>
         </h2>
         <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show"
@@ -73,7 +105,7 @@
             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                 data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false"
                 aria-controls="panelsStayOpen-collapseTwo">
-                Accordion Item #2
+                Spoilers
             </button>
         </h2>
         <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse"
@@ -86,25 +118,6 @@
                 {{textContent}}
 
                 {{/each}}
-            </div>
-        </div>
-    </div>
-    <div class="accordion-item">
-        <h2 class="accordion-header" id="panelsStayOpen-headingThree">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false"
-                aria-controls="panelsStayOpen-collapseThree">
-                Accordion Item #3
-            </button>
-        </h2>
-        <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse"
-            aria-labelledby="panelsStayOpen-headingThree">
-            <div class="accordion-body">
-                <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse
-                plugin adds the appropriate classes that we use to style each element. These classes control the overall
-                appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with
-                custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go
-                within the <code>.accordion-body</code>, though the transition does limit overflow.
             </div>
         </div>
     </div>
