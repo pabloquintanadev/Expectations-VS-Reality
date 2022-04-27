@@ -11,15 +11,75 @@
 body {
   padding: 50px;
   font-family: 'Bebas Neue', cursive;
-  background: white
+  background: #1f1f1f;
   }
 
-a {
-  color: #00b7ff;
+.green-color {
+  color:#23a125;
+  text-decoration: none;
 }
 
+.green-color-bg {
+  background-color:#23a125;
+}
+
+/* From uiverse.io */
+.green-btn {
+  --color: #23a125;
+  font-family: inherit;
+  display: inline-block;
+  width: 3em;
+  height: 2.6em;
+  line-height: 2.5em;
+  margin: 20px;
+  position: relative;
+  overflow: hidden;
+  border: 2px solid var(--color);
+  transition: color .5s;
+  z-index: 1;
+  font-size: 17px;
+  border-radius: 6px;
+  font-weight: 500;
+  color: var(--color);
+ }
+ 
+ .green-btn:before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  background: var(--color);
+  height: 150px;
+  width: 200px;
+  border-radius: 50%;
+ }
+ 
+ .green-btn:hover {
+  color: #fff;
+ }
+ 
+ .green-btn:before {
+  top: 100%;
+  left: 100%;
+  transition: all .7s;
+ }
+ 
+ .green-btn:hover:before {
+  top: -30px;
+  left: -30px;
+ }
+ 
+ .green-btn:active:before {
+  background: #23a125;
+  transition: background 0s;
+ }
+
+a {
+  color: #23a125;
+}
+
+
 h1 {
-  color: 15px;
+  color: 15px ;
 }
 .animated-title-container{
   height: 400px;
@@ -30,18 +90,29 @@ h1 {
 }
 
 .animated-title{
+  color: #23a125;
+  font-size: 200px;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+}
+
+.animated-title-small{
+  color: #23a125;
+  font-size: 15px;
   display: flex;
   text-align: center;
   justify-content: center;
 }
 
 .glass {
-background: rgba(255, 255, 255, 0.23);
+/* From https://css.glass */
+background: rgba(255, 255, 255, 0.2);
 border-radius: 16px;
 box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-backdrop-filter: blur(7.8px);
--webkit-backdrop-filter: blur(7.8px);
-border: 1px solid rgba(255, 255, 255, 0.6);
+backdrop-filter: blur(20px);
+-webkit-backdrop-filter: blur(20px);
+border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 
@@ -72,7 +143,7 @@ border: 1px solid rgba(255, 255, 255, 0.6);
  left: 0;
  right: 0;
  bottom: 0;
- background: linear-gradient(45deg, transparent 3%, #00e6f6 3%, #00e6f6 5%, #ff013c 5%);
+ background: linear-gradient(45deg, transparent 3%, white 3%, white 5%, #23a125 5%);
  text-shadow: -3px -3px 0px #f8f005, 3px 3px 0px #00e6f6;
  clip-path: var(--slice-0);
 }
