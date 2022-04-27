@@ -31,6 +31,9 @@ const userSchema = new Schema(
         }],
         savedMovies: {
             type: Array
+        },
+        likesCounter: {
+            type: Number
         }
     },
     {

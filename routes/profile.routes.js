@@ -5,6 +5,9 @@ const Post = require('./../models/Post.model')
 const Short = require('./../models/Short.model')
 const User = require('./../models/User.model')
 
+const APIHandler = require('./../public/js/APIHandler')
+const imdb = new APIHandler()
+
 router.get('/list', (req, res, next) => {
     User
         .find()
@@ -80,8 +83,30 @@ router.get('/inbox', (req, res) => {
 
 router.get('/saved-movies', (req, res) => {
 
+    const { savedMovies } = req.session.currentUser
+    // const savedMoviesArr = [...savedMovies]
 
-    res.render('profile/saved-movies')
+    const movieSavedArr = []
+
+    console.log(savedMovies + 'HOLAAAA')
+
+    savedMovies.forEach(movie => {
+
+        movieSavedArr.push(imdb.getTrailer(movie))
+
+
+    });
+
+    Promise
+        .all(movieSavedArr)
+        .then(responses => res.render('profile/saved-movies', { responses })
+        )
+        .catch(err => console.log(err))
+
+
+
+
+
 
 
 })
