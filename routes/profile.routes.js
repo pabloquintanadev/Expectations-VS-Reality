@@ -16,12 +16,22 @@ router.get('/list', (req, res, next) => {
 
 
 
-router.get('/:userId', (req, res, next) => {
+router.get('/details/:userId', (req, res, next) => {
 
     const { userId } = req.params
 
     User
         .findById(userId)
+        .then(user => res.render('profile/details', user))
+        .catch(err => console.log(err))
+})
+
+router.get('/myprofile', (req, res, next) => {
+
+    const { _id } = req.session.currentUser
+
+    User
+        .findById(_id)
         .then(user => res.render('profile/details', user))
         .catch(err => console.log(err))
 })
@@ -50,6 +60,30 @@ router.post('/:userId/edit', (req, res) => {
             res.redirect(`/user/${user._id}`)
         })
         .catch(err => console.log(err))
+})
+
+
+// INBOX PAGE
+
+router.get('/inbox', (req, res) => {
+
+    Message
+        .find({ destination: req.session.currentUser._id })
+        .populate('origin')
+        .then(messages => {
+            res.render('profile/inbox', { messages })
+        })
+        .catch(err => console.log(err))
+})
+
+// SAVED MOVIES PAGE
+
+router.get('/saved-movies', (req, res) => {
+
+
+    res.render('profile/saved-movies')
+
+
 })
 
 // //USER'S SHORTS

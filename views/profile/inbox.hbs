@@ -1,12 +1,19 @@
-diteils of profail
+{{#each messages}}
 
-Hola soy {{username}}
+mensaje de {{origin.username}}
+<hr>
+el emsnaej es::
+{{textContent}}
 
+<form action="/messages/{{id}}/delete" method="POST">
+    <button class="btn btn-outline-danger btn-md px-3" type="submit">
 
+    </button>
+</form>
 
-<form action="/messages/{{id}}/new-message" method="POST">
+<form action="/messages/{{origin.id}}/message-answer" method="POST">
     <div class="mb-3">
-        <h3>ENVIAR MENSAJE A {{username}}</h3>
+        <h3>CONTESTAR A {{origin.username}}</h3>
     </div>
     <div class="mb-3">
         <label for="textContent" class="form-label">Mensajukiiiii</label>
@@ -20,10 +27,4 @@ Hola soy {{username}}
     <button type="submit" class="btn btn-dark">Enviar mensaje</button>
 </form>
 
-
-
-
-
-
-y mi foto es:
-<img src="{{profileImage}}" alt="">
+{{/each}}

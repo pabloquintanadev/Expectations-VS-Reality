@@ -16,12 +16,7 @@ router.post('/:movieOrShortId/new-post', (req, res) => {
     const author = req.session.currentUser
     const { movieOrShortId } = req.params
     const { textContent, type } = req.body
-    // console.log(req.session.currentUser + '-------' + req.params + '-------' + req.body)
-    // console.log(req.params)
-    // console.log('------')
-    // console.log(req.body)
-    // console.log('------')
-    // console.log(req.session.currentUser)
+
     Post
         .create({ author, textContent, type, movieOrShortId })
         .then(() => res.redirect(`/movies/details/${movieOrShortId}`))

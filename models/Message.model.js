@@ -2,19 +2,15 @@ const { Schema, model } = require("mongoose");
 
 const messageSchema = new Schema(
   {
-    from: {
-      type: String,
+    origin: {
+      type: Schema.Types.ObjectId,
+      ref: 'User'
     },
-    to: {
+    destination: {
       type: String,
-      unique: true
     },
     textContent: {
       type: String,
-    },
-    likesCounter: {
-      type: Number,
-      default: 0
     }
   },
   {
