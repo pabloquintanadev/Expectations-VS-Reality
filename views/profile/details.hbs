@@ -1,8 +1,7 @@
-diteils of profail
-
-Hola soy {{username}}
-
-
+<div>
+Welcome back {{username}}!
+<img src="{{profileImage}}" alt="" class="rounded">
+</div>
 
 <form action="/messages/{{id}}/new-message" method="POST">
     <div class="mb-3">
@@ -19,11 +18,3 @@ Hola soy {{username}}
     {{/if}}
     <button type="submit" class="btn btn-dark">Enviar mensaje</button>
 </form>
-
-
-
-
-
-
-y mi foto es:
-<img src="{{profileImage}}" alt="">
