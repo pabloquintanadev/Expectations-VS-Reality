@@ -5,29 +5,33 @@ const Post = require('../models/Post.model')
 const Short = require('../models/Short.model')
 const User = require('../models/User.model')
 
-router.post('/:postId/like', (req, res, next) => {
+
+// MAKE MASTERPIECE
+
+router.post('/:shortId/masterpiece', (req, res) => {
+
+    const { shortId } = req.params
+
+    Short
+        .findByIdAndUpdate(shortId, { isMasterpiece: true, isBullshit: false })
+        .then(() => res.redirect(`/shorts/details/${shortId}`))
+        .catch(err => console.log(err))
 
 })
 
-router.post('/:shortId/like', (req, res, next) => {
+// MAKE BULLSHIT
+
+router.post('/:shortId/bullshit', (req, res) => {
+
+    const { shortId } = req.params
+
+    Short
+        .findByIdAndUpdate(shortId, { isMasterpiece: false, isBullshit: true })
+        .then(() => res.redirect(`/shorts/details/${shortId}`))
+        .catch(err => console.log(err))
 
 })
 
-router.post('/:shortId/masterpiece', (req, res, next) => {
-
-})
-
-router.post('/:shortId/bullshit', (req, res, next) => {
-
-})
-
-router.post('/:shortId/masterpieceOut', (req, res, next) => {
-
-})
-
-router.post('/:shortId/bullshitOut', (req, res, next) => {
-
-})
 
 
 

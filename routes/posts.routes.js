@@ -67,5 +67,17 @@ router.post('/:postId/delete', (req, res) => {
 })
 
 
+//LIKE A POST
+
+// router.post('/:userId/like', (req, res, next) => {
+
+//     const { userId } = req.params
+
+//     User
+//         .findByIdAndUpdate(userId, { $inc: { key: likesCounter } })
+
+// })
+
+
 
 module.exports = router

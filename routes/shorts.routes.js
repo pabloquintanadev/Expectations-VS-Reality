@@ -8,15 +8,6 @@ const Short = require('./../models/Short.model')
 const User = require('./../models/User.model')
 
 
-
-router.get('/masterpieces', (req, res, next) => {
-    res.render('shorts/masterpieces')
-})
-
-router.get('/bullshits', (req, res, next) => {
-    res.render('shorts/bullshits')
-})
-
 // CRUD
 
 router.get('/', (req, res) => {
@@ -119,22 +110,6 @@ router.post('/:shortId/save', (req, res) => {
         .then(() => res.redirect(`/shorts/details/${shortId}`))
         .catch(err => console.log(err))
 
-    // const promises = [
-
-    //     Short.findById(shortId),
-    //     // User.findById(req.session.currentUser._id),
-
-    // ]
-
-    // Promise
-    //     .all(promises)
-    //     .then(([short, user]) => {
-    //         User.findByIdAndUpdate(_id, { $push: { savedShorts: short } })
-    //         res.redirect(`/shorts/details/${shortId}`)
-    //     })
-    //     .catch(err => console.log(err))
-
-
 })
 
 // router.post('/:shortId/unsave', (req, res) => {
@@ -149,8 +124,46 @@ router.post('/:shortId/save', (req, res) => {
 //         )
 //         .catch(err => console.log(err))
 
-
 // })
+
+//___________________
+
+//MASTERPIECE AND BULLSHIT LISTS
+
+router.get('/masterpieces', (req, res, next) => {
+
+    Short
+        .find({ isMasterpiece: true })
+        // .then(e => console.log(e))
+        .then(masterpieces => res.render('shorts/masterpieces', { masterpieces }))
+        .catch(err => console.log(err))
+
+
+
+})
+
+router.get('/bullshits', (req, res, next) => {
+    Short
+        .find({ isBullshit: true })
+        // .then(e => console.log(e))
+        .then(bullshits => res.render('shorts/bullshits', { bullshits }))
+        .catch(err => console.log(err))
+})
+
+
+// LIKE A SHORT
+
+router.post('/like/:userId/:shortId', (req, res, next) => {
+
+    const { userId, shortId } = req.params
+
+    User
+        .findByIdAndUpdate(userId, { $inc: { likesCounter: 1 } })
+        .then(() => res.redirect(`/shorts/details/${shortId}`))
+        .catch(err => console.log(err))
+
+})
+
 
 
 
