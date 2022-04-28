@@ -12,10 +12,12 @@ const User = require('./../models/User.model')
 
 router.get('/', (req, res) => {
 
+    const isAdmin = req.session.currentUser.role === 'ADMIN'
+
     Short
         .find()
         .then(shorts => {
-            res.render('shorts/shorts-list', { shorts })
+            res.render('shorts/shorts-list', { shorts, isAdmin })
         })
         .catch(err => next(err))
 })
