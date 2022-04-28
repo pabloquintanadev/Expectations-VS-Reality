@@ -57,4 +57,17 @@ router.post('/:movieId/save', (req, res) => {
         .catch(err => console.log(err))
 })
 
+// UNSAVE A MOVIE
+
+router.post('/:movieId/unsave', (req, res) => {
+
+    const { movieId } = req.params
+
+    User
+        .findById(req.session.currentUser._id)
+        .update({ $pull: { savedMovies: movieId } })
+        .then(() => res.redirect(`/movies/details/${movieId}`))
+        .catch(err => console.log(err))
+})
+
 module.exports = router

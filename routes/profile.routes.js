@@ -1,5 +1,6 @@
 const router = require("express").Router()
 
+const { findById } = require("./../models/Message.model")
 const Message = require('./../models/Message.model')
 const Post = require('./../models/Post.model')
 const Short = require('./../models/Short.model')
@@ -94,12 +95,13 @@ router.get('/saved-movies', (req, res) => {
 
     const { savedMovies } = req.session.currentUser
 
-    const movieSavedArr = savedMovies.map(movie => imdb.getTrailer(movie))
-
-
-
-    Promise
-        .all(movieSavedArr)
+    User
+        .findById(req.session.currentUser._id)
+        .then(user => {
+            const movieSavedArr = user.savedMovies.map(movie => imdb.getTrailer(movie))
+            return Promise
+                .all(movieSavedArr)
+        })
         .then(responses => res.render('profile/saved-movies', { responses }))
         .catch(err => console.log(err))
 
@@ -122,17 +124,23 @@ router.get('/saved-movies', (req, res) => {
 
 // //SAVED SHORTS
 
-// router.get('/:userId/edit', (req, res) => {
+router.get('/saved-shorts', (req, res) => {
 
-//     const { id } = req.params
+    const { _id } = req.session.currentUser
 
-//     User
-//         .findById(id)
-//         .then(user => {
-//             res.render('profile/edit-form', user)
-//         })
-//         .catch(err => console.log(err))
-// })
+
+    User
+        .findById(_id)
+        .populate({
+            path: 'savedShorts',
+            populate: [
+                { path: 'author' }
+            ]
+        })
+        .then(user => res.render('profile/saved-shorts', user))
+        .catch(err => console.log(err))
+
+})
 
 
 module.exports = router

@@ -114,20 +114,31 @@ router.post('/delete/:shortId/', (req, res) => {
         .catch(err => console.log(err))
 })
 
-// SAVE (to do!!!)
+// SAVE 
 
-router.post('/:shortId/save', (req, res) => {
+router.post('/save/:shortId', (req, res) => {
 
     const { shortId } = req.params
 
     const { _id } = req.session.currentUser
 
-    console.log(_id)
-
     User.findByIdAndUpdate(_id, { $addToSet: { savedShorts: shortId } })
         .then(() => res.redirect(`/shorts/details/${shortId}`))
         .catch(err => console.log(err))
 
+})
+
+// UNSAVE A MOVIE
+
+router.post('/unsave/:shortId', (req, res) => {
+
+    const { shortId } = req.params
+
+    User
+        .findById(req.session.currentUser._id)
+        .update({ $pull: { savedShorts: shortId } })
+        .then(() => res.redirect(`/shorts/details/${shortId}`))
+        .catch(err => console.log(err))
 })
 
 
