@@ -22,7 +22,8 @@
     <span class="navbar-toggler-icon"></span>
   </button>
   <form class="form-inline my-2 my-lg-0 d-flex flex-row" action="/movies/search" method="POST">
-    <input class="form-control mr-sm-2 glass" type="search" placeholder="Search a Trailer" aria-label="Search" name="title">
+    <input class="form-control mr-sm-2 glass" type="search" placeholder="Search a Trailer" aria-label="Search"
+      name="title">
     <button class="btn green-btn my-2 my-sm-0 d-flex flex-column justify-content-center" type="submit">
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search"
         viewBox="0 0 16 16">
@@ -60,7 +61,7 @@
         </li>
       </ul>
     </div>
-
+    {{#if user}}
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item dropdown">
@@ -74,6 +75,7 @@
                   d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z" />
               </svg>
             </button>
+
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
               <li><a class="dropdown-item" href="/profile/myprofile">My profile</a></li>
               <li><a class="dropdown-item" href="/profile/inbox">Message inbox</a></li>
@@ -93,6 +95,8 @@
         </li>
       </ul>
     </div>
+    {{/if}}
+    {{#unless user}}
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
@@ -104,6 +108,7 @@
       </ul>
     </div>
   </div>
+  {{/unless}}
 
 
 </nav>
@@ -114,7 +119,7 @@
 <body>
 
   {{{body}}}
-  
+
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
     integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
     crossorigin="anonymous"></script>
@@ -123,4 +128,5 @@
     crossorigin="anonymous"></script>
   <script src="/js/script.js"></script>
 </body>
+
 </html>

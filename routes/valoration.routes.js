@@ -39,9 +39,19 @@ router.post('/shortlike/:userId/:shortId', (req, res, next) => {
     const { userId, shortId } = req.params
 
     User
-        .findByIdAndUpdate(userId, { $inc: { likesCounter: 1 } })
+        .findByIdAndUpdate(userId, { $inc: { likesCounter: 1 } }, { new: true })
+        .then(user => {
+            if (user.likesCounter >= 10 && user.role === 'USER') {
+                User
+                    .findByIdAndUpdate(userId, { role: "CREATOR" }, { new: true })
+                    .then(next())
+            } else {
+                next()
+            }
+        })
         .then(() => res.redirect(`/shorts/details/${shortId}`))
         .catch(err => next(err))
+
 })
 
 
@@ -53,6 +63,15 @@ router.post('/movielike/:userId/:movieId', (req, res, next) => {
 
     User
         .findByIdAndUpdate(userId, { $inc: { likesCounter: 1 } })
+        .then(user => {
+            if (user.likesCounter >= 10 && user.role === 'USER') {
+                User
+                    .findByIdAndUpdate(userId, { role: "CREATOR" }, { new: true })
+                    .then(next())
+            } else {
+                next()
+            }
+        })
         .then(() => res.redirect(`/movies/details/${movieId}`))
         .catch(err => next(err))
 })
