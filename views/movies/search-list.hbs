@@ -1,10 +1,14 @@
 <div class="container pl-5 pt-3">
-    <h3>search results:</h3>
-    <ul>
-        {{#each movies}}
-        <li class="d-flex flex-row align-items green-color">
-            <a class="pl-5" href="/movies/details/{{id}}">{{title}}</a>
-        </li>
-        {{/each}}
-    </ul>
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+            <h3>search results:</h3>
+            <ul>
+                {{#each movies}}
+                    <li class="d-flex flex-row align-items green-color mb-3">
+                        <a class="pl-5" href="/movies/details/{{id}}">{{title}}</a>
+                    </li>
+                {{/each}}
+            </ul>
+        </div>
+    </div>
 </div>

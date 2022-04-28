@@ -1,32 +1,39 @@
-<a href="/profile/saved-movies">INBOX</a>
-
+<h3>inbox</h3>
 {{#each messages}}
+<p>
+From:{{origin.username}}
+</p>
 
-mensaje de {{origin.username}}
-<hr>
-el emsnaej es::
-{{textContent}}
+<p>message:</p>
+<div class="col-md-8">
+<div class="container glass pt-3">
+    <p>{{textContent}}</p>
+</div>
+<div class="container d-flex flex-row-reverse mb-0">
+    <form action="/messages/{{id}}/delete" method="POST">
+        <button class="btn red-btn btn-md px-3 py-0" type="submit">
+            borrar
+        </button>
+    </form>
+</div>
+</div>
 
-<form action="/messages/{{id}}/delete" method="POST">
-    <button class="btn btn-outline-danger btn-md px-3" type="submit">
-        BORRAR MENSAJE
-    </button>
-</form>
 
+<div class="col-md-8">
 <form action="/messages/{{origin.id}}/message-answer" method="POST">
     <div class="mb-3">
-        <h3>CONTESTAR A {{origin.username}}</h3>
-    </div>
-    <div class="mb-3">
-        <label for="textContent" class="form-label">Mensajukiiiii</label>
-        <textarea class="form-control" id="textContent" rows="3" name="textContent"></textarea>
+        <label for="textContent" class="form-label">reply:{{origin.username}}</label>
+        <textarea class="form-control glass" id="textContent" rows="3" name="textContent" placeholder="type something..."></textarea>
     </div>
 
 
     {{#if errorMessage}}
     <div id="error">{{errorMessage}}</div>
     {{/if}}
-    <button type="submit" class="btn btn-dark">Enviar mensaje</button>
+    <div class="container d-flex flex-row-reverse mb-0">
+        <button type="submit" class="btn green-btn btn-md px-3 py-0">send</button>
+    </div>
+    </div>
 </form>
 
 {{/each}}

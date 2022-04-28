@@ -1,20 +1,33 @@
-<div class="container">
+<div class="container mt-4">
     <div class="row justify-content-center">
         <div class="col-md-5">
             <h1>Update profile</h1>
             <hr>
-            <form action="/profile/edit/{{id}}" method="POST">
+            <form action="/profile/edit/{{id}}" method="POST" enctype="multipart/form-data">
+
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" class="form-control" id="name" name="name" value="{{name}}">
+                </div>
+
                 <div class="mb-3">
                     <label for="username" class="form-label">Username</label>
                     <input type="text" class="form-control" id="username" name="username" value="{{username}}">
                 </div>
-
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" name="email" value="{{email}}">
+                </div>
+                <div class="mb-3">
+                    <label for="profileImage" class="form-label">Profile picture</label>
+                    <input type="file" class="form-control-file" id="profileImage" name="profileImage" value="{{profileImage}}">
+                </div>
 
 
                 {{#if errorMessage}}
                 <div id="error">{{errorMessage}}</div>
                 {{/if}}
-                <button type="submit" class="btn btn-dark">Log in</button>
+                <button class="btn green-btn m-0 mt-1 py-0 px-3" type="submit" class="btn btn-dark">update</button>
             </form>
         </div>
     </div>

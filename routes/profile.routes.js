@@ -6,6 +6,8 @@ const Post = require('./../models/Post.model')
 const Short = require('./../models/Short.model')
 const User = require('./../models/User.model')
 
+const fileUploader = require("../config/cloudinary.config")
+
 const APIHandler = require('./../public/js/APIHandler')
 const imdb = new APIHandler()
 
@@ -60,7 +62,7 @@ router.get('/myprofile', (req, res, next) => {
 
 //EDIT
 
-router.get('/edit/:userId', (req, res) => {
+router.get('/edit/:userId', (req, res, next) => {
 
     const { userId } = req.params
 
@@ -72,13 +74,13 @@ router.get('/edit/:userId', (req, res) => {
         .catch(err => next(err))
 })
 
-router.post('/edit/:userId', (req, res) => {
+router.post('/edit/:userId', fileUploader.any('profileImage'), (req, res, next) => {
 
     const { userId } = req.params
-
+    const { name, username, email } = req.body
 
     User
-        .findByIdAndUpdate(userId, req.body)
+        .findByIdAndUpdate(userId, {name, username, email, profileImage: req.files[0].path})
         .then(() => {
             res.redirect(`/profile/myprofile/`)
         })
@@ -88,7 +90,7 @@ router.post('/edit/:userId', (req, res) => {
 
 // INBOX PAGE
 
-router.get('/inbox', (req, res) => {
+router.get('/inbox', (req, res, next) => {
 
     Message
         .find({ destination: req.session.currentUser._id })
@@ -101,7 +103,7 @@ router.get('/inbox', (req, res) => {
 
 // SAVED MOVIES PAGE
 
-router.get('/saved-movies', (req, res) => {
+router.get('/saved-movies', (req, res, next) => {
 
     const { savedMovies } = req.session.currentUser
 
@@ -119,7 +121,7 @@ router.get('/saved-movies', (req, res) => {
 
 //USER'S SHORTS
 
-router.get('/user-shorts/:userId/', (req, res) => {
+router.get('/user-shorts/:userId/', (req, res, next) => {
 
     const { userId } = req.params
 
@@ -134,7 +136,7 @@ router.get('/user-shorts/:userId/', (req, res) => {
 
 //SAVED SHORTS
 
-router.get('/saved-shorts', (req, res) => {
+router.get('/saved-shorts', (req, res, next) => {
 
     const { _id } = req.session.currentUser
 

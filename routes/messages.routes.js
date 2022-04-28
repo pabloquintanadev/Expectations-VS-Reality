@@ -14,7 +14,7 @@ const { isLoggedOut, isLoggedIn } = require('./../middleware/route-guard')
 
 // NEW MESSAGE
 
-router.post('/:destId/new-message', (req, res) => {
+router.post('/:destId/new-message', (req, res, next) => {
 
     const origin = req.session.currentUser._id
     const destination = req.params.destId
@@ -28,7 +28,7 @@ router.post('/:destId/new-message', (req, res) => {
 
 //ANSWER A MESSAGE
 
-router.post('/:destId/message-answer', (req, res) => {
+router.post('/:destId/message-answer', (req, res, next) => {
 
     const origin = req.session.currentUser
     let destination = req.params.destId
@@ -43,7 +43,7 @@ router.post('/:destId/message-answer', (req, res) => {
 
 // DELETE A MESSAGE
 
-router.post('/:messageId/delete', (req, res) => {
+router.post('/:messageId/delete', (req, res, next) => {
 
     const { messageId } = req.params
 

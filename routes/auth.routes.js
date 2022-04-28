@@ -11,7 +11,7 @@ const fileUploader = require("../config/cloudinary.config")
 //REGISTER
 
 
-router.get('/register', isLoggedOut, (req, res) => {
+router.get('/register', isLoggedOut, (req, res, next) => {
     res.render('auth/register-form')
 })
 
@@ -22,7 +22,7 @@ router.post('/register', isLoggedOut, fileUploader.any('profileImage'), (req, re
     bcryptjs
         .genSalt(saltRounds)
         .then(salt => bcryptjs.hash(plainPassword, salt))
-        .then(hashedPassword => User.create({ username, email, password: hashedPassword, profileImage: req.files[0].path }))
+        .then(hashedPassword => User.create({ name, username, email, password: hashedPassword, profileImage: req.files[0].path }))
         .then(() => res.redirect('/'))
         .catch(error => next(error));
 })
@@ -30,7 +30,7 @@ router.post('/register', isLoggedOut, fileUploader.any('profileImage'), (req, re
 
 //LOGIN
 
-router.get('/login', isLoggedOut, (req, res) => {
+router.get('/login', isLoggedOut, (req, res, next) => {
     res.render('auth/login-form')
 })
 

@@ -46,7 +46,7 @@ router.post('/new-short', fileUploader.single('videoFile'), (req, res) => {
 // SHORT DETAILS
 
 
-router.get('/details/:shortId', (req, res) => {
+router.get('/details/:shortId', (req, res, next) => {
 
     const { shortId } = req.params
 
@@ -72,7 +72,7 @@ router.get('/details/:shortId', (req, res) => {
 
 //SHORT EDIT
 
-router.get('/edit/:shortId', (req, res) => {
+router.get('/edit/:shortId', (req, res, next) => {
 
     Short
         .findById(req.params.shortId)
@@ -82,7 +82,7 @@ router.get('/edit/:shortId', (req, res) => {
         .catch(err => next(err))
 })
 
-router.post('/edit/:shortId', (req, res) => {
+router.post('/edit/:shortId', (req, res, next) => {
 
     Short
         .findByIdAndUpdate(req.params.shortId, req.body)
@@ -94,7 +94,7 @@ router.post('/edit/:shortId', (req, res) => {
 
 // DELETE A SHORT
 
-router.post('/delete/:shortId/', (req, res) => {
+router.post('/delete/:shortId/', (req, res, next) => {
 
     Short
         .findOneAndDelete(req.params.shortId)
@@ -106,7 +106,7 @@ router.post('/delete/:shortId/', (req, res) => {
 
 // SAVE 
 
-router.post('/save/:shortId', (req, res) => {
+router.post('/save/:shortId', (req, res, next) => {
 
     const { shortId } = req.params
 
@@ -120,7 +120,7 @@ router.post('/save/:shortId', (req, res) => {
 
 // UNSAVE A MOVIE
 
-router.post('/unsave/:shortId', (req, res) => {
+router.post('/unsave/:shortId', (req, res, next) => {
 
     const { shortId } = req.params
 

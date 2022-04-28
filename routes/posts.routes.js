@@ -10,7 +10,7 @@ const imdb = new APIHandler()
 
 //NEW POST ON MOVIE
 
-router.post('/:movieId/new-post', (req, res) => {
+router.post('/:movieId/new-post', (req, res, next) => {
 
     const author = req.session.currentUser
     const { movieId } = req.params
@@ -25,7 +25,7 @@ router.post('/:movieId/new-post', (req, res) => {
 
 // DELETE A POST ON MOVIE
 
-router.post('/:postId/delete/:movieId', (req, res) => {
+router.post('/:postId/delete/:movieId', (req, res, next) => {
 
     const { postId, movieId } = req.params
 
@@ -40,7 +40,7 @@ router.post('/:postId/delete/:movieId', (req, res) => {
 
 //NEW POST ON SHORT
 
-router.post('/shorts/:shortId/new-post', (req, res) => {
+router.post('/shorts/:shortId/new-post', (req, res, next) => {
 
     const author = req.session.currentUser
     const { shortId } = req.params
@@ -56,7 +56,7 @@ router.post('/shorts/:shortId/new-post', (req, res) => {
 
 // DELETE A POST ON SHORT
 
-router.post('/shorts/:postId/delete/:shortId', (req, res) => {
+router.post('/shorts/:postId/delete/:shortId', (req, res, next) => {
 
     const { postId, shortId } = req.params
 

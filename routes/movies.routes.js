@@ -12,7 +12,7 @@ const { isLoggedOut, isLoggedIn } = require('./../middleware/route-guard')
 
 //SEARCH
 
-router.post('/search', (req, res) => {
+router.post('/search', (req, res, next) => {
 
     imdb
         .getDetails(req.body.title)
@@ -23,7 +23,7 @@ router.post('/search', (req, res) => {
 
 // SINGLE MOVIE PAGE
 
-router.get('/details/:movieId', (req, res) => {
+router.get('/details/:movieId', (req, res, next) => {
 
     const { movieId } = req.params
 
@@ -46,7 +46,7 @@ router.get('/details/:movieId', (req, res) => {
 
 // SAVE A MOVIE
 
-router.post('/:movieId/save', (req, res) => {
+router.post('/:movieId/save', (req, res, next) => {
 
     const { movieId } = req.params
 

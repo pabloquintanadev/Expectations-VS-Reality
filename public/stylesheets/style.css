@@ -63,6 +63,23 @@ h1, h2, h3, h4, h5, a, p, label{
   background-color:#23a125;
 }
 
+.profile-border{
+  border-color: #23a125;
+  border-width: 5px;
+  border-style: groove;
+}
+
+.profile-border-small{
+  border-color: #23a125;
+  border-width: 1px;
+  border-style: solid;
+}
+
+.profile-text{
+  font-size:60px;
+  text-decoration: none;
+}
+
 /* From uiverse.io */
 .green-btn {
   --color: #23a125;
@@ -303,3 +320,4 @@ border: 1px solid rgba(255, 255, 255, 0.3);
   transform: translate(0);
  }
 }
+

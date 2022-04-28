@@ -1,11 +1,13 @@
-LISTA DE PERFILES
-
-<ul>
-    {{#each users}}
-
-    <li><a href="/profile/details/{{id}}">{{username}}</a></li>
-
-    {{/each}}
-
-
-</ul>
+<div class="container d-flex flex-row justify-content-center">
+    <h3 class="py-3">All profiles</h3>
+</div>
+<div class="container">
+    <div class="row">
+        {{#each users}}
+        <div class="col-md-3 d-flex flex-column align-items-center">
+            <img class="rounded-circle profile-border-small" src="{{profileImage}}" style="width: 100px; height: 100px; object-fit: cover;"/>
+            <a class="profile-text"href="/profile/details/{{id}}">{{username}}</a>
+        </div>
+        {{/each}}
+    </div>
+</div>

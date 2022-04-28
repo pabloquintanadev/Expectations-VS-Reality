@@ -8,7 +8,7 @@ const User = require('../models/User.model')
 
 // MAKE MASTERPIECE
 
-router.post('/:shortId/masterpiece', (req, res) => {
+router.post('/:shortId/masterpiece', (req, res, next) => {
 
     const { shortId } = req.params
 
@@ -21,7 +21,7 @@ router.post('/:shortId/masterpiece', (req, res) => {
 
 // MAKE BULLSHIT
 
-router.post('/:shortId/bullshit', (req, res) => {
+router.post('/:shortId/bullshit', (req, res, next) => {
 
     const { shortId } = req.params
 
