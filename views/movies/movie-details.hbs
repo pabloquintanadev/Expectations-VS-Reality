@@ -3,7 +3,7 @@
         <div class="container mb-3">
             <div class="row">
                 <div class="col-md-10">
-                    <iframe width="900" height="315" src="{{movieInfo.linkEmbed}}" frameborder="0"
+                    <iframe width="900" height="315" src="{{viewData.movieInfo.linkEmbed}}" frameborder="0"
                         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                         allowfullscreen></iframe>
                 </div>
@@ -11,11 +11,11 @@
                     <p class="card-text">
                         <strong>Summary:</strong>
                         <br>
-                        {{movieInfo.videoDescription}}
+                        {{viewData.movieInfo.videoDescription}}
                         <br>
                     <div class="container d-flex flex-row justify-content-evenly">
                         {{!-- {{#if isNotSaved}} --}}
-                        <form action="/movies/{{movieInfo.imDbId}}/save" method="POST">
+                        <form action="/movies/{{viewData.movieInfo.imDbId}}/save" method="POST">
                             <button class="btn green-btn btn-md my-0 py-0" type="submit">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                     class="bi bi-bookmark-star" viewBox="0 0 16 16">
@@ -29,7 +29,7 @@
                         {{!-- {{/if}} --}}
 
                         {{!-- {{#if isSaved}} --}}
-                        <form action="/movies/{{movieInfo.imDbId}}/unsave" method="POST">
+                        <form action="/movies/{{viewData.movieInfo.imDbId}}/unsave" method="POST">
                             <button class="btn red-btn btn-md my-0 py-0" type="submit">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                     class="bi bi-bookmark-star" viewBox="0 0 16 16">
@@ -49,8 +49,9 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <h5 class="card-title mb-3"><strong>{{movieInfo.title}}</strong></h5>
-                    <p class="card-text"><small class="text-muted">Release year: <i>{{movieInfo.year}}</small></p>
+                    <h5 class="card-title mb-3"><strong>{{viewData.movieInfo.title}}</strong></h5>
+                    <p class="card-text"><small class="text-muted">Release year: <i>{{viewData.movieInfo.year}}</small>
+                    </p>
                 </div>
             </div>
         </div>
@@ -58,7 +59,7 @@
 </div>
 
 
-<form action="/posts/{{movieInfo.imDbId}}/new-post" method="POST">
+<form action="/posts/{{viewData.movieInfo.imDbId}}/new-post" method="POST">
     <div class="mb-3">
         <div class="mb-3">
             <label for="textContent" class="form-label"></label>
@@ -77,7 +78,8 @@
                 </div>
                 <div class="col-md-8"></div>
                 <div class="col-md-2">
-                    <select class="form-select btn green-btn my-1 px-1" id="type" name="type" aria-label="Default select example">
+                    <select class="form-select btn green-btn my-1 px-1" id="type" name="type"
+                        aria-label="Default select example">
                         <option value="COMMENT" selected>Comment</option>
                         <option value="SPOILER">Spoiler</option>
                     </select>
@@ -99,21 +101,22 @@
         <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show"
             aria-labelledby="panelsStayOpen-headingOne">
             <div class="accordion-body">
-                <ul>{{#each comments}}
+                <ul>{{#each viewData.comments}}
                     <li>USER: {{author.username}}
 
                         TEXTO: {{textContent}}
 
-                        <form action="/valoration/movielike/{{author.id}}/{{./../movieInfo.imDbId}}" method="POST">
+                        <form action="/valoration/movielike/{{author.id}}/{{./../viewData.movieInfo.imDbId}}"
+                            method="POST">
                             <button class="btn btn-outline-danger btn-md px-3" type="submit">
                                 LIKE THIS COMMENT </button>
                         </form>
-
-                        <form action="/posts/{{_id}}/delete/{{./../movieInfo.imDbId}}" method="POST">
+                        {{#if ./../isAdmin}}
+                        <form action="/posts/{{_id}}/delete/{{./../viewData.movieInfo.imDbId}}" method="POST">
                             <button class="btn btn-outline-danger btn-md px-3" type="submit">
                                 DELETE </button>
                         </form>
-
+                        {{/if}}
                     </li>
                     {{/each}}
                 </ul>
@@ -133,17 +136,19 @@
         <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse"
             aria-labelledby="panelsStayOpen-headingTwo">
             <div class="accordion-body">
-                <ul>{{#each spoilers}}
+                <ul>{{#each viewData.spoilers}}
                     <li>USER: {{author.username}}
                         TEXTO: {{textContent}}</li>
-                    <form action="/valoration/movielike/{{author.id}}/{{./../movieInfo.imDbId}}" method="POST">
+                    <form action="/valoration/movielike/{{author.id}}/{{./../viewData.movieInfo.imDbId}}" method="POST">
                         <button class="btn btn-outline-danger btn-md px-3" type="submit">
                             LIKE THIS SPOILER </button>
                     </form>
-                    <form action="/posts/{{_id}}/delete/{{./../movieInfo.imDbId}}" method="POST">
+                    {{#if ./../isAdmin}}
+                    <form action="/posts/{{_id}}/delete/{{./../viewData.movieInfo.imDbId}}" method="POST">
                         <button class="btn btn-outline-danger btn-md px-3" type="submit">
                             DELETE </button>
                     </form>
+                    {{/if}}
                     {{/each}}
                 </ul>
             </div>

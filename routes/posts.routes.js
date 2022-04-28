@@ -5,12 +5,15 @@ const Post = require('../models/Post.model')
 const Short = require('../models/Short.model')
 const User = require('../models/User.model')
 
+const { isLoggedOut, isLoggedIn } = require('./../middleware/route-guard')
+
+
 const APIHandler = require('../public/js/APIHandler')
 const imdb = new APIHandler()
 
 //NEW POST ON MOVIE
 
-router.post('/:movieId/new-post', (req, res, next) => {
+router.post('/:movieId/new-post', isLoggedIn, (req, res, next) => {
 
     const author = req.session.currentUser
     const { movieId } = req.params
@@ -25,7 +28,7 @@ router.post('/:movieId/new-post', (req, res, next) => {
 
 // DELETE A POST ON MOVIE
 
-router.post('/:postId/delete/:movieId', (req, res, next) => {
+router.post('/:postId/delete/:movieId', isLoggedIn, (req, res, next) => {
 
     const { postId, movieId } = req.params
 
@@ -40,7 +43,7 @@ router.post('/:postId/delete/:movieId', (req, res, next) => {
 
 //NEW POST ON SHORT
 
-router.post('/shorts/:shortId/new-post', (req, res, next) => {
+router.post('/shorts/:shortId/new-post', isLoggedIn, (req, res, next) => {
 
     const author = req.session.currentUser
     const { shortId } = req.params

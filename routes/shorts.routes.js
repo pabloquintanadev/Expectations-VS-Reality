@@ -2,6 +2,8 @@ const router = require("express").Router()
 
 const fileUploader = require("../config/cloudinary.config")
 
+const { isLoggedOut, isLoggedIn } = require('./../middleware/route-guard')
+
 const Message = require('./../models/Message.model')
 const Post = require('./../models/Post.model')
 const Short = require('./../models/Short.model')
@@ -32,7 +34,6 @@ router.get('/new-short', (req, res) => {
 router.post('/new-short', fileUploader.single('videoFile'), (req, res) => {
 
     const { title, summary, genre } = req.body
-    console.log(req.file)
     const { path } = req.file
     const { currentUser } = req.session
 
@@ -50,6 +51,8 @@ router.get('/details/:shortId', (req, res, next) => {
 
     const { shortId } = req.params
 
+    const isAdmin = req.session.currentUser.role === 'ADMIN'
+
     const promises = [
         Short.findById(shortId)
             .populate('author'),
@@ -63,7 +66,7 @@ router.get('/details/:shortId', (req, res, next) => {
         .all(promises)
         .then(([shortInfo, comments, spoilers]) => {
             const viewData = { shortInfo, comments, spoilers }
-            res.render('shorts/short-details', viewData)
+            res.render('shorts/short-details', { viewData, isAdmin })
         })
         .catch(err => next(err))
 })
@@ -106,7 +109,7 @@ router.post('/delete/:shortId/', (req, res, next) => {
 
 // SAVE 
 
-router.post('/save/:shortId', (req, res, next) => {
+router.post('/save/:shortId', isLoggedIn, (req, res, next) => {
 
     const { shortId } = req.params
 
@@ -120,7 +123,7 @@ router.post('/save/:shortId', (req, res, next) => {
 
 // UNSAVE A MOVIE
 
-router.post('/unsave/:shortId', (req, res, next) => {
+router.post('/unsave/:shortId', isLoggedIn, (req, res, next) => {
 
     const { shortId } = req.params
 

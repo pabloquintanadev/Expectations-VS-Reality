@@ -5,6 +5,9 @@ const Post = require('../models/Post.model')
 const Short = require('../models/Short.model')
 const User = require('../models/User.model')
 
+const { isLoggedOut, isLoggedIn } = require('./../middleware/route-guard')
+
+
 
 // MAKE MASTERPIECE
 
@@ -34,7 +37,7 @@ router.post('/:shortId/bullshit', (req, res, next) => {
 
 // LIKE A SHORT or A POST IN A SHORT
 
-router.post('/shortlike/:userId/:shortId', (req, res, next) => {
+router.post('/shortlike/:userId/:shortId', isLoggedIn, (req, res, next) => {
 
     const { userId, shortId } = req.params
 
@@ -57,7 +60,7 @@ router.post('/shortlike/:userId/:shortId', (req, res, next) => {
 
 // LIKE A POST IN A MOVIE
 
-router.post('/movielike/:userId/:movieId', (req, res, next) => {
+router.post('/movielike/:userId/:movieId', isLoggedIn, (req, res, next) => {
 
     const { userId, movieId } = req.params
 

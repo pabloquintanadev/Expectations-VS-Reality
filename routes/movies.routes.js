@@ -27,6 +27,9 @@ router.get('/details/:movieId', (req, res, next) => {
 
     const { movieId } = req.params
 
+    const isAdmin = req.session.currentUser.role === 'ADMIN'
+
+
     const promises = [
         imdb.getTrailer(movieId),
         Post.find({ movieOrShortId: movieId, type: 'COMMENT' })
@@ -39,7 +42,7 @@ router.get('/details/:movieId', (req, res, next) => {
         .all(promises)
         .then(([movieInfo, comments, spoilers]) => {
             const viewData = { movieInfo: movieInfo.data, comments, spoilers }
-            res.render('movies/movie-details', viewData)
+            res.render('movies/movie-details', { viewData, isAdmin })
         })
         .catch(err => next(err))
 })

@@ -4,7 +4,7 @@ const saltRounds = 10
 
 const User = require('./../models/User.model')
 
-const { isLoggedOut } = require('./../middleware/route-guard')
+const { isLoggedOut, isLoggedIn } = require('./../middleware/route-guard')
 
 const fileUploader = require("../config/cloudinary.config")
 

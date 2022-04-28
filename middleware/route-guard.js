@@ -1,5 +1,4 @@
 const isLoggedIn = (req, res, next) => {
-    console.log('---VAMOS A COMPROBAR LA SESIÓN---->', req.session)
     !req.session.currentUser ? res.render('auth/login-form', { errorMessage: 'Desautorizado' }) : next()
 }
 

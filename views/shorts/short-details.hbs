@@ -1,11 +1,11 @@
 <div class="card mb-3">
   <div class="card-body">
-    <h5 class="card-title"><strong>{{shortInfo.title}}</strong> by <i>
-        <a href="/profile/details/{{shortInfo.author.id}}"> {{shortInfo.author.username}}</a>
+    <h5 class="card-title"><strong>{{viewData.shortInfo.title}}</strong> by <i>
+        <a href="/profile/details/{{viewData.shortInfo.author.id}}"> {{viewData.shortInfo.author.username}}</a>
     </h5>
-    <p class="card-text">{{shortInfo.summary}}</p>
+    <p class="card-text">{{viewData.shortInfo.summary}}</p>
 
-    <button class="btn btn-md btn-outline-dark" href="/shorts/edit/{{shortInfo.id}}">
+    <button class="btn btn-md btn-outline-dark" href="/shorts/edit/{{viewData.shortInfo.id}}">
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-brush"
         viewBox="0 0 16 16">
         <path
@@ -14,47 +14,49 @@
     </button>
     {{!-- LE PODEMOS METER FECHA DE CREACION Y UPDATE???????????'' --}}
     <figure>
-      <iframe width="560" height="315" src="{{shortInfo.videoFile}}" frameborder="0"
+      <iframe width="560" height="315" src="{{viewData.shortInfo.videoFile}}" frameborder="0"
         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </figure>
     <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
   </div>
 </div>
 
-<a href="/shorts/edit/{{shortInfo.id}}">EDITAR ESTA PUTA OBRA MAESTRA
+<a href="/shorts/edit/{{viewData.shortInfo.id}}">EDITAR ESTA PUTA OBRA MAESTRA
 </a>
 
-<form action="/shorts/save/{{shortInfo.id}}" method="POST">
+<form action="/shorts/save/{{viewData.shortInfo.id}}" method="POST">
   <button class="btn btn-outline-danger btn-md px-3" type="submit">
     SAVE
   </button>
 </form>
 
-<form action="/shorts/unsave/{{shortInfo.id}}" method="POST">
+<form action="/shorts/unsave/{{viewData.shortInfo.id}}" method="POST">
   <button class="btn btn-outline-danger btn-md px-3" type="submit">
     UNSAVE
   </button>
 </form>
+{{#if isAdmin}}
 
-<form action="/valoration/{{shortInfo.id}}/masterpiece" method="POST">
+<form action="/valoration/{{viewData.shortInfo.id}}/masterpiece" method="POST">
   <button class="btn btn-outline-danger btn-md px-3" type="submit">
     OH FUCK THIS IS A FUCKING MASTERPIECE
   </button>
 </form>
 
 
-<form action="/valoration/{{shortInfo.id}}/bullshit" method="POST">
+<form action="/valoration/{{viewData.shortInfo.id}}/bullshit" method="POST">
   <button class="btn btn-outline-danger btn-md px-3" type="submit">
     OH SHIT THIS IS A DAMN BULLSHIT
   </button>
 </form>
+{{/if}}
 
-<form action="/valoration/shortlike/{{shortInfo.author.id}}/{{shortInfo.id}}" method="POST">
+<form action="/valoration/shortlike/{{viewData.shortInfo.author.id}}/{{viewData.shortInfo.id}}" method="POST">
   <button class="btn btn-outline-danger btn-md px-3" type="submit">
     LIKE THIS CORTO </button>
 </form>
 
-<form action="/posts/shorts/{{shortInfo.id}}/new-post" method="POST">
+<form action="/posts/shorts/{{viewData.shortInfo.id}}/new-post" method="POST">
   <div class="mb-3">
     <div class="mb-3">
       <label for="textContent" class="form-label"></label>
@@ -94,21 +96,22 @@
       aria-labelledby="panelsStayOpen-headingOne">
       <div class="accordion-body">
         aquí comentarios
-        <ul>{{#each comments}}
+        <ul>{{#each viewData.comments}}
 
           <li>USER: {{author.username}}
 
             TEXTO: {{textContent}}
 
-            <form action="/valoration/shortlike/{{author.id}}/{{./../shortInfo.id}}" method="POST">
+            <form action="/valoration/shortlike/{{author.id}}/{{id}}" method="POST">
               <button class="btn btn-outline-danger btn-md px-3" type="submit">
                 LIKE THIS COMMENT </button>
             </form>
-
-            <form action="/posts/shorts/{{id}}/delete/{{./../shortInfo.id}}" method="POST">
+            {{#if ./../isAdmin}}
+            <form action="/posts/shorts/{{id}}/delete/{{./../viewData.shortInfo.id}}" method="POST">
               <button class="btn btn-outline-danger btn-md px-3" type="submit">
                 BORRAR JODER</button>
             </form>
+            {{/if}}
 
           </li>
 
