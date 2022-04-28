@@ -12,10 +12,10 @@ require("./config")(app);
 
 require("./config/session.config")(app)
 
-app.locals.appTitle = 'MASTERSHIT';
+app.locals.appTitle = 'MASTERSHIT'
+app.locals.isLogged = false
 
-const index = require("./routes/index.routes");
-app.use("/", index);
+require("./routes")(app)
 
 require("./error-handling")(app);
 

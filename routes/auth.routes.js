@@ -57,6 +57,8 @@ router.post('/login', (req, res, next) => {
             }
 
             req.session.currentUser = user
+            req.app.locals.isLogged = true
+
             res.redirect('/')
         })
         .catch(error => next(error));
@@ -66,6 +68,7 @@ router.post('/login', (req, res, next) => {
 //LOGOUT
 
 router.post('/logout', (req, res, next) => {
+    req.app.locals.isLogged = false
     req.session.destroy(() => res.redirect('/'))
 })
 
