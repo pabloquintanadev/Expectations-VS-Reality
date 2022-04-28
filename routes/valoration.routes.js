@@ -32,6 +32,31 @@ router.post('/:shortId/bullshit', (req, res) => {
 
 })
 
+// LIKE A SHORT or A POST IN A SHORT
+
+router.post('/shortlike/:userId/:shortId', (req, res, next) => {
+
+    const { userId, shortId } = req.params
+
+    User
+        .findByIdAndUpdate(userId, { $inc: { likesCounter: 1 } })
+        .then(() => res.redirect(`/shorts/details/${shortId}`))
+        .catch(err => console.log(err))
+})
+
+
+// LIKE A POST IN A MOVIE
+
+router.post('/movielike/:userId/:movieId', (req, res, next) => {
+
+    const { userId, movieId } = req.params
+
+    User
+        .findByIdAndUpdate(userId, { $inc: { likesCounter: 1 } })
+        .then(() => res.redirect(`/movies/details/${movieId}`))
+        .catch(err => console.log(err))
+})
+
 
 
 

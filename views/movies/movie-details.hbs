@@ -104,9 +104,14 @@
 
                         TEXTO: {{textContent}}
 
+                        <form action="/valoration/movielike/{{author.id}}/{{./../movieInfo.imDbId}}" method="POST">
+                            <button class="btn btn-outline-danger btn-md px-3" type="submit">
+                                LIKE THIS COMMENT </button>
+                        </form>
+
                         <form action="/posts/{{_id}}/delete/{{./../movieInfo.imDbId}}" method="POST">
                             <button class="btn btn-outline-danger btn-md px-3" type="submit">
-                            </button>
+                                DELETE </button>
                         </form>
 
                     </li>
@@ -142,9 +147,14 @@
 
                         TEXTO: {{textContent}}</li>
 
+                    <form action="/valoration/movielike/{{author.id}}/{{./../movieInfo.imDbId}}" method="POST">
+                        <button class="btn btn-outline-danger btn-md px-3" type="submit">
+                            LIKE THIS SPOILER </button>
+                    </form>
+
                     <form action="/posts/{{_id}}/delete/{{./../movieInfo.imDbId}}" method="POST">
                         <button class="btn btn-outline-danger btn-md px-3" type="submit">
-                        </button>
+                            DELETE </button>
                     </form>
 
 

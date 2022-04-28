@@ -46,13 +46,33 @@ router.post('/new-short', fileUploader.single('videoFile'), (req, res) => {
 
 router.get('/details/:shortId', (req, res) => {
 
-    Short
-        .findById(req.params.shortId)
-        .populate('author')
-        .then(short => {
-            res.render('shorts/short-details', short)
+    // Short
+    //     .findById(req.params.shortId)
+    //     .populate('author')
+    //     .then(short => {
+    //         res.render('shorts/short-details', short)
+    //     })
+    //     .catch(err => console.log(err))
+
+    const { shortId } = req.params
+
+
+    const promises = [
+        Short.findById(shortId)
+            .populate('author'),
+        Post.find({ movieOrShortId: shortId, type: 'COMMENT' })
+            .populate('author'),
+        Post.find({ movieOrShortId: shortId, type: 'SPOILER' })
+            .populate('author'),
+    ]
+
+    Promise
+        .all(promises)
+        .then(([shortInfo, comments, spoilers]) => {
+            const viewData = { shortInfo, comments, spoilers }
+            res.render('shorts/short-details', viewData)
         })
-        .catch(err => console.log(err))
+        .catch(err => next(err))
 })
 
 
@@ -133,17 +153,7 @@ router.get('/bullshits', (req, res, next) => {
 })
 
 
-// LIKE A SHORT
 
-router.post('/like/:userId/:shortId', (req, res, next) => {
-
-    const { userId, shortId } = req.params
-
-    User
-        .findByIdAndUpdate(userId, { $inc: { likesCounter: 1 } })
-        .then(() => res.redirect(`/shorts/details/${shortId}`))
-        .catch(err => console.log(err))
-})
 
 
 module.exports = router

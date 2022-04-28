@@ -1,11 +1,11 @@
 <div class="card mb-3">
   <div class="card-body">
-    <h5 class="card-title"><strong>{{title}}</strong> by <i>
-        <a href="/profile/details/{{author.id}}"> {{author.username}}</a>
+    <h5 class="card-title"><strong>{{shortInfo.title}}</strong> by <i>
+        <a href="/profile/details/{{shortInfo.author.id}}"> {{shortInfo.author.username}}</a>
     </h5>
-    <p class="card-text">{{summary}}</p>
+    <p class="card-text">{{shortInfo.summary}}</p>
 
-    <button class="btn btn-md btn-outline-dark" href="/shorts/edit/{{id}}">
+    <button class="btn btn-md btn-outline-dark" href="/shorts/edit/{{shortInfo.id}}">
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-brush"
         viewBox="0 0 16 16">
         <path
@@ -14,42 +14,114 @@
     </button>
     {{!-- LE PODEMOS METER FECHA DE CREACION Y UPDATE???????????'' --}}
     <figure>
-      <iframe width="560" height="315" src="{{videoFile}}" frameborder="0"
+      <iframe width="560" height="315" src="{{shortInfo.videoFile}}" frameborder="0"
         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </figure>
     <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
   </div>
 </div>
 
-<a href="/shorts/edit/{{id}}">EDITAR ESTA PUTA OBRA MAESTRA
+<a href="/shorts/edit/{{shortInfo.id}}">EDITAR ESTA PUTA OBRA MAESTRA
 </a>
 
-<form action="/shorts/{{id}}/save" method="POST">
+<form action="/shorts/{{shortInfo.id}}/save" method="POST">
   <button class="btn btn-outline-danger btn-md px-3" type="submit">
     SAVE
   </button>
 </form>
 
-<form action="/shorts/{{id}}/unsave" method="POST">
+<form action="/shorts/{{shortInfo.id}}/unsave" method="POST">
   <button class="btn btn-outline-danger btn-md px-3" type="submit">
     UNSAVE
   </button>
 </form>
 
-<form action="/valoration/{{id}}/masterpiece" method="POST">
+<form action="/valoration/{{shortInfo.id}}/masterpiece" method="POST">
   <button class="btn btn-outline-danger btn-md px-3" type="submit">
     OH FUCK THIS IS A FUCKING MASTERPIECE
   </button>
 </form>
 
 
-<form action="/valoration/{{id}}/bullshit" method="POST">
+<form action="/valoration/{{shortInfo.id}}/bullshit" method="POST">
   <button class="btn btn-outline-danger btn-md px-3" type="submit">
     OH SHIT THIS IS A DAMN BULLSHIT
   </button>
 </form>
 
-<form action="/shorts/like/{{author.id}}/{{id}}" method="POST">
+<form action="/valoration/like/{{shortInfo.author.id}}/{{shortInfo.id}}" method="POST">
   <button class="btn btn-outline-danger btn-md px-3" type="submit">
-    LIKE THIS SHIT </button>
+    LIKE THIS CORTO </button>
 </form>
+
+<form action="/posts/shorts/{{shortInfo.id}}/new-post" method="POST">
+  <div class="mb-3">
+    <div class="mb-3">
+      <label for="textContent" class="form-label"></label>
+      <textarea class="form-control" id="textContent" rows="3" name="textContent"
+        placeholder="Comment something or protect other users from spoilers"></textarea>
+    </div>
+    <input id="isShort" name="isShort" type="hidden" value="false">
+    {{!-- <input id="type" name="type" type="hidden" value="COMMENT"> --}}
+
+    {{#if errorMessage}}
+    <div id="error">{{errorMessage}}</div>
+    {{/if}}
+    <div class="container">
+      <div class="row">
+        <div class="col-md-2">
+          <button type="submit" class="btn btn-dark">Send Post</button>
+        </div>
+        <div class="col-md-8"></div>
+        <div class="col-md-2">
+          <input id="type" name="type" type="hidden" value="COMMENT">
+
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+<div class="accordion" id="accordionPanelsStayOpenExample">
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse"
+        data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+        Comments
+      </button>
+    </h2>
+    <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show"
+      aria-labelledby="panelsStayOpen-headingOne">
+      <div class="accordion-body">
+        aquí comentarios
+        <ul>{{#each comments}}
+
+          <li>USER: {{author.username}}
+
+            TEXTO: {{textContent}}
+
+            <form action="/valoration/shortlike/{{author.id}}/{{./../shortInfo.id}}" method="POST">
+              <button class="btn btn-outline-danger btn-md px-3" type="submit">
+                LIKE THIS COMMENT </button>
+            </form>
+
+            <form action="/posts/shorts/{{id}}/delete/{{./../shortInfo.id}}" method="POST">
+              <button class="btn btn-outline-danger btn-md px-3" type="submit">
+              </button>
+            </form>
+
+          </li>
+
+
+
+
+          {{/each}}
+        </ul>
+
+
+
+
+      </div>
+    </div>
+  </div>
+</div>

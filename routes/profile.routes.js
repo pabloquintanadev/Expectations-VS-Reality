@@ -42,7 +42,7 @@ router.get('/myprofile', (req, res, next) => {
 
     User
         .findById(_id)
-        .then(user => res.render('profile/details', user))
+        .then(user => res.render('profile/my-profile', user))
         .catch(err => console.log(err))
 })
 

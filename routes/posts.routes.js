@@ -12,55 +12,22 @@ const imdb = new APIHandler()
 //POSTS
 
 
-//NEW POST
+//NEW POST ON MOVIE
 
-router.post('/:movieOrShortId/new-post', (req, res) => {
+router.post('/:movieId/new-post', (req, res) => {
 
     const author = req.session.currentUser
-    const { movieOrShortId } = req.params
+    const { movieId } = req.params
     const { textContent, type } = req.body
 
     Post
-        .create({ author, textContent, type, movieOrShortId })
-        .then(() => res.redirect(`/movies/details/${movieOrShortId}`))
+        .create({ author, textContent, type, movieOrShortId: movieId })
+        .then(() => res.redirect(`/movies/details/${movieId}`))
         .catch(err => console.log(err))
 
 })
 
-// //EDIT A POST
-
-
-// router.get('/edit/:postId', (req, res) => {
-
-//     const { post_id } = req.params
-
-//     Post
-//         .findById(post_id)
-//         .then(post => {
-//             res.render('posts/edit-form', post)
-//         })
-//         .catch(err => console.log(err))
-// })
-
-// router.post('/edit/:postId', (req, res) => {
-
-//     const { post_id } = req.params
-
-//     Post
-//         .findByIdAndUpdate(post_id, req.body)
-//         .find({ movieOrShortId: id })
-//         .then(post => {
-//             if (isShort) {
-//                 res.render(`shorts/${movieOrShortId}/short-details`, post)
-//             } else {
-//                 res.render(`/movies/${movieOrShortId}/movie-details`, post)
-//             }
-//         })
-//         .catch(err => console.log(err))
-// })
-
-
-// DELETE A POST
+// DELETE A POST ON MOVIE
 
 router.post('/:postId/delete/:movieId', (req, res) => {
 
@@ -75,16 +42,35 @@ router.post('/:postId/delete/:movieId', (req, res) => {
 })
 
 
-//LIKE A POST
+//NEW POST ON SHORT
 
-// router.post('/:userId/like', (req, res, next) => {
+router.post('/shorts/:shortId/new-post', (req, res) => {
 
-//     const { userId } = req.params
+    const author = req.session.currentUser
+    const { shortId } = req.params
+    const { textContent, type } = req.body
 
-//     User
-//         .findByIdAndUpdate(userId, { $inc: { key: likesCounter } })
+    Post
+        .create({ author, textContent, type, movieOrShortId: shortId })
+        .then(() => res.redirect(`/shorts/details/${shortId}`))
+        .catch(err => console.log(err))
 
-// })
+})
+
+// DELETE A POST ON SHORT
+
+router.post('/shorts/:postId/delete/:shortId', (req, res) => {
+
+    const { postId, shortId } = req.params
+
+    Post
+        .findByIdAndDelete(postId)
+        .then(() => {
+            res.redirect(`/shorts/details/${shortId}`)
+        })
+        .catch(err => console.log(err))
+})
+
 
 
 
