@@ -2,7 +2,14 @@ const router = require("express").Router();
 
 /* GET home page */
 router.get("/", (req, res, next) => {
-  res.render("index");
+
+  const user = req.session.currentUser
+
+  if (!user) {
+    res.render("index")
+  } else {
+    res.render("index", { user })
+  }
 });
 
 // auth routes
