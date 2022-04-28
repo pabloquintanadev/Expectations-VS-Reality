@@ -17,7 +17,7 @@ router.post('/search', (req, res) => {
     imdb
         .getDetails(req.body.title)
         .then(({ data }) => { res.render('movies/search-list', { movies: data.results }) })
-        .catch(err => console.log(err))
+        .catch(err => next(err))
 })
 
 
@@ -54,7 +54,7 @@ router.post('/:movieId/save', (req, res) => {
         .findById(req.session.currentUser._id)
         .update({ $addToSet: { savedMovies: movieId } })
         .then(() => res.redirect(`/movies/details/${movieId}`))
-        .catch(err => console.log(err))
+        .catch(err => next(err))
 })
 
 // UNSAVE A MOVIE
@@ -67,7 +67,7 @@ router.post('/:movieId/unsave', (req, res) => {
         .findById(req.session.currentUser._id)
         .update({ $pull: { savedMovies: movieId } })
         .then(() => res.redirect(`/movies/details/${movieId}`))
-        .catch(err => console.log(err))
+        .catch(err => next(err))
 })
 
 module.exports = router

@@ -17,7 +17,7 @@ router.get('/', (req, res) => {
         .then(shorts => {
             res.render('shorts/shorts-list', { shorts })
         })
-        .catch(err => console.log(err))
+        .catch(err => next(err))
 })
 
 // CREATE
@@ -37,7 +37,7 @@ router.post('/new-short', fileUploader.single('videoFile'), (req, res) => {
     Short
         .create({ title, summary, genre, videoFile: path, author: currentUser })
         .then(newShort => res.redirect(`/shorts/details/${newShort._id}`))
-        .catch(err => console.log('ERROR ----', err))
+        .catch(err => next(err))
 })
 
 
@@ -46,16 +46,7 @@ router.post('/new-short', fileUploader.single('videoFile'), (req, res) => {
 
 router.get('/details/:shortId', (req, res) => {
 
-    // Short
-    //     .findById(req.params.shortId)
-    //     .populate('author')
-    //     .then(short => {
-    //         res.render('shorts/short-details', short)
-    //     })
-    //     .catch(err => console.log(err))
-
     const { shortId } = req.params
-
 
     const promises = [
         Short.findById(shortId)
@@ -86,7 +77,7 @@ router.get('/edit/:shortId', (req, res) => {
         .then(short => {
             res.render('shorts/edit-form', short)
         })
-        .catch(err => console.log(err))
+        .catch(err => next(err))
 })
 
 router.post('/edit/:shortId', (req, res) => {
@@ -96,11 +87,8 @@ router.post('/edit/:shortId', (req, res) => {
         .then(short => {
             res.redirect(`/shorts/details/${short._id}`)
         })
-        .catch(err => console.log(err))
+        .catch(err => next(err))
 })
-
-
-
 
 // DELETE A SHORT
 
@@ -111,7 +99,7 @@ router.post('/delete/:shortId/', (req, res) => {
         .then(() => {
             res.redirect('/shorts')
         })
-        .catch(err => console.log(err))
+        .catch(err => next(err))
 })
 
 // SAVE 
@@ -124,7 +112,7 @@ router.post('/save/:shortId', (req, res) => {
 
     User.findByIdAndUpdate(_id, { $addToSet: { savedShorts: shortId } })
         .then(() => res.redirect(`/shorts/details/${shortId}`))
-        .catch(err => console.log(err))
+        .catch(err => next(err))
 
 })
 
@@ -138,7 +126,7 @@ router.post('/unsave/:shortId', (req, res) => {
         .findById(req.session.currentUser._id)
         .update({ $pull: { savedShorts: shortId } })
         .then(() => res.redirect(`/shorts/details/${shortId}`))
-        .catch(err => console.log(err))
+        .catch(err => next(err))
 })
 
 
@@ -149,22 +137,16 @@ router.get('/masterpieces', (req, res, next) => {
 
     Short
         .find({ isMasterpiece: true })
-        // .then(e => console.log(e))
         .then(masterpieces => res.render('shorts/masterpieces', { masterpieces }))
-        .catch(err => console.log(err))
+        .catch(err => next(err))
 
 })
 
 router.get('/bullshits', (req, res, next) => {
     Short
         .find({ isBullshit: true })
-        // .then(e => console.log(e))
         .then(bullshits => res.render('shorts/bullshits', { bullshits }))
-        .catch(err => console.log(err))
+        .catch(err => next(err))
 })
-
-
-
-
 
 module.exports = router

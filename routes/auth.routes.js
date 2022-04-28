@@ -2,8 +2,6 @@ const router = require("express").Router()
 const bcryptjs = require('bcryptjs')
 const saltRounds = 10
 
-
-
 const User = require('./../models/User.model')
 
 const { isLoggedOut } = require('./../middleware/route-guard')
@@ -20,9 +18,6 @@ router.get('/register', isLoggedOut, (req, res) => {
 router.post('/register', isLoggedOut, fileUploader.any('profileImage'), (req, res, next) => {
 
     const { name, username, email, plainPassword } = req.body
-    console.log(req.body)
-    console.log(req)
-    console.log(req.files)
 
     bcryptjs
         .genSalt(saltRounds)
@@ -38,7 +33,6 @@ router.post('/register', isLoggedOut, fileUploader.any('profileImage'), (req, re
 router.get('/login', isLoggedOut, (req, res) => {
     res.render('auth/login-form')
 })
-
 
 router.post('/login', (req, res, next) => {
 
@@ -70,7 +64,6 @@ router.post('/login', (req, res, next) => {
 
 
 //LOGOUT
-
 
 router.post('/logout', (req, res, next) => {
     req.session.destroy(() => res.redirect('/'))
