@@ -8,10 +8,6 @@ const User = require('../models/User.model')
 const APIHandler = require('../public/js/APIHandler')
 const imdb = new APIHandler()
 
-
-//POSTS
-
-
 //NEW POST ON MOVIE
 
 router.post('/:movieId/new-post', (req, res) => {
@@ -23,7 +19,7 @@ router.post('/:movieId/new-post', (req, res) => {
     Post
         .create({ author, textContent, type, movieOrShortId: movieId })
         .then(() => res.redirect(`/movies/details/${movieId}`))
-        .catch(err => console.log(err))
+        .catch(err => next(err))
 
 })
 
@@ -38,7 +34,7 @@ router.post('/:postId/delete/:movieId', (req, res) => {
         .then(() => {
             res.redirect(`/movies/details/${movieId}`)
         })
-        .catch(err => console.log(err))
+        .catch(err => next(err))
 })
 
 
@@ -53,9 +49,10 @@ router.post('/shorts/:shortId/new-post', (req, res) => {
     Post
         .create({ author, textContent, type, movieOrShortId: shortId })
         .then(() => res.redirect(`/shorts/details/${shortId}`))
-        .catch(err => console.log(err))
+        .catch(err => next(err))
 
 })
+
 
 // DELETE A POST ON SHORT
 
@@ -68,10 +65,7 @@ router.post('/shorts/:postId/delete/:shortId', (req, res) => {
         .then(() => {
             res.redirect(`/shorts/details/${shortId}`)
         })
-        .catch(err => console.log(err))
+        .catch(err => next(err))
 })
-
-
-
 
 module.exports = router

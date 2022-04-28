@@ -10,7 +10,7 @@ const APIHandler = require('./../public/js/APIHandler')
 const imdb = new APIHandler()
 
 
-//USERS LIST (needed?)
+//USERS LIST
 
 router.get('/list', (req, res, next) => {
     User
@@ -18,7 +18,7 @@ router.get('/list', (req, res, next) => {
         .then(users => {
             res.render('profile/profiles-list', { users })
         })
-        .catch(err => console.log(err))
+        .catch(err => next(err))
 })
 
 
@@ -28,14 +28,23 @@ router.get('/details/:userId', (req, res, next) => {
 
     const { userId } = req.params
 
-    User
-        .findById(userId)
-        .then(user => res.render('profile/details', user))
-        .catch(err => console.log(err))
+    const { _id } = req.session.currentUser
+
+    if (userId === _id) {
+        User
+            .findById(_id)
+            .then(user => res.render('profile/my-profile', user))
+            .catch(err => next(err))
+    } else {
+        User
+            .findById(userId)
+            .then(user => res.render('profile/details', user))
+            .catch(err => next(err))
+    }
+
 })
 
-
-//OWN PROFILE PAGE
+// MY PROFILE
 
 router.get('/myprofile', (req, res, next) => {
 
@@ -44,7 +53,8 @@ router.get('/myprofile', (req, res, next) => {
     User
         .findById(_id)
         .then(user => res.render('profile/my-profile', user))
-        .catch(err => console.log(err))
+        .catch(err => next(err))
+
 })
 
 
@@ -59,7 +69,7 @@ router.get('/edit/:userId', (req, res) => {
         .then(user => {
             res.render('profile/edit-form', user)
         })
-        .catch(err => console.log(err))
+        .catch(err => next(err))
 })
 
 router.post('/edit/:userId', (req, res) => {
@@ -72,7 +82,7 @@ router.post('/edit/:userId', (req, res) => {
         .then(() => {
             res.redirect(`/profile/myprofile/`)
         })
-        .catch(err => console.log(err))
+        .catch(err => next(err))
 })
 
 
@@ -86,7 +96,7 @@ router.get('/inbox', (req, res) => {
         .then(messages => {
             res.render('profile/inbox', { messages })
         })
-        .catch(err => console.log(err))
+        .catch(err => next(err))
 })
 
 // SAVED MOVIES PAGE
@@ -103,31 +113,30 @@ router.get('/saved-movies', (req, res) => {
                 .all(movieSavedArr)
         })
         .then(responses => res.render('profile/saved-movies', { responses }))
-        .catch(err => console.log(err))
+        .catch(err => next(err))
 
 })
 
-// //USER'S SHORTS
+//USER'S SHORTS
 
-// router.get('/:userId/edit', (req, res) => {
+router.get('/user-shorts/:userId/', (req, res) => {
 
-//     const { id } = req.params
+    const { userId } = req.params
 
-//     User
-//         .findById(id)
-//         .then(user => {
-//             res.render('profile/edit-form', user)
-//         })
-//         .catch(err => console.log(err))
-// })
+    Short
+        .find({ author: userId })
+        .then(shorts => {
+            res.render('profile/user-shorts', { shorts })
+        })
+        .catch(err => console.log(err))
+})
 
 
-// //SAVED SHORTS
+//SAVED SHORTS
 
 router.get('/saved-shorts', (req, res) => {
 
     const { _id } = req.session.currentUser
-
 
     User
         .findById(_id)
@@ -138,7 +147,7 @@ router.get('/saved-shorts', (req, res) => {
             ]
         })
         .then(user => res.render('profile/saved-shorts', user))
-        .catch(err => console.log(err))
+        .catch(err => next(err))
 
 })
 

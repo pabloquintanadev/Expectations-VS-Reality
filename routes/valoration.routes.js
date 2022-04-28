@@ -15,7 +15,7 @@ router.post('/:shortId/masterpiece', (req, res) => {
     Short
         .findByIdAndUpdate(shortId, { isMasterpiece: true, isBullshit: false })
         .then(() => res.redirect(`/shorts/details/${shortId}`))
-        .catch(err => console.log(err))
+        .catch(err => next(err))
 
 })
 
@@ -28,7 +28,7 @@ router.post('/:shortId/bullshit', (req, res) => {
     Short
         .findByIdAndUpdate(shortId, { isMasterpiece: false, isBullshit: true })
         .then(() => res.redirect(`/shorts/details/${shortId}`))
-        .catch(err => console.log(err))
+        .catch(err => next(err))
 
 })
 
@@ -41,7 +41,7 @@ router.post('/shortlike/:userId/:shortId', (req, res, next) => {
     User
         .findByIdAndUpdate(userId, { $inc: { likesCounter: 1 } })
         .then(() => res.redirect(`/shorts/details/${shortId}`))
-        .catch(err => console.log(err))
+        .catch(err => next(err))
 })
 
 
@@ -54,11 +54,7 @@ router.post('/movielike/:userId/:movieId', (req, res, next) => {
     User
         .findByIdAndUpdate(userId, { $inc: { likesCounter: 1 } })
         .then(() => res.redirect(`/movies/details/${movieId}`))
-        .catch(err => console.log(err))
+        .catch(err => next(err))
 })
-
-
-
-
 
 module.exports = router

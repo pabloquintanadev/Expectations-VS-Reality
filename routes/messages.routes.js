@@ -37,7 +37,7 @@ router.post('/:destId/message-answer', (req, res) => {
     Message
         .create({ origin, destination, textContent })
         .then(() => res.redirect(`/profile/inbox`))
-        .catch(err => console.log(err))
+        .catch(err => next(err))
 })
 
 
@@ -50,7 +50,7 @@ router.post('/:messageId/delete', (req, res) => {
     Message
         .findByIdAndDelete(messageId)
         .then(() => res.redirect(`/profile/inbox`))
-        .catch(err => console.log(err))
+        .catch(err => next(err))
 })
 
 module.exports = router
