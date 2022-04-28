@@ -13,7 +13,14 @@ body {
   font-family: 'Bebas Neue', cursive;
   background: #1f1f1f;
   }
+.btn-sizing{
+  width: 30px;
+  height: 30px;
+}
 
+h1, h2, h3, h4, h5, a, p, label{
+  color:white;
+}
 .green-color {
   color:#23a125;
   text-decoration: none;
@@ -28,8 +35,6 @@ body {
   --color: #23a125;
   font-family: inherit;
   display: inline-block;
-  width: 3em;
-  height: 2.6em;
   line-height: 2.5em;
   margin: 20px;
   position: relative;
@@ -60,7 +65,7 @@ body {
  .green-btn:before {
   top: 100%;
   left: 100%;
-  transition: all .7s;
+  transition: all .3s;
  }
  
  .green-btn:hover:before {
