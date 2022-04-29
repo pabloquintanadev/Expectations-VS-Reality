@@ -2,7 +2,7 @@ const router = require("express").Router()
 
 const fileUploader = require("../config/cloudinary.config")
 
-const { isLoggedOut, isLoggedIn } = require('./../middleware/route-guard')
+const { isLoggedOut, isLoggedIn, checkRole } = require('./../middleware/route-guard')
 
 const Message = require('./../models/Message.model')
 const Post = require('./../models/Post.model')
@@ -18,6 +18,7 @@ router.get('/', (req, res) => {
 
     Short
         .find()
+        .populate('author')
         .then(shorts => {
             res.render('shorts/shorts-list', { shorts, isAdmin })
         })
@@ -27,7 +28,7 @@ router.get('/', (req, res) => {
 // CREATE
 
 
-router.get('/new-short', (req, res) => {
+router.get('/new-short', isLoggedIn, checkRole('CREATOR', 'ADMIN'), (req, res) => {
     res.render('shorts/new-short-form')
 })
 
@@ -51,7 +52,11 @@ router.get('/details/:shortId', (req, res, next) => {
 
     const { shortId } = req.params
 
+
+
     const isAdmin = req.session.currentUser.role === 'ADMIN'
+
+    // const isSaved = req.session.currentUser.savedShorts.includes(shortId)
 
     const promises = [
         Short.findById(shortId)
@@ -60,13 +65,17 @@ router.get('/details/:shortId', (req, res, next) => {
             .populate('author'),
         Post.find({ movieOrShortId: shortId, type: 'SPOILER' })
             .populate('author'),
+        User
+            .findById(req.session.currentUser._id)
     ]
 
     Promise
         .all(promises)
-        .then(([shortInfo, comments, spoilers]) => {
+        .then(([shortInfo, comments, spoilers, user]) => {
             const viewData = { shortInfo, comments, spoilers }
-            res.render('shorts/short-details', { viewData, isAdmin })
+            const isSaved = user.savedShorts.includes(shortId)
+
+            res.render('shorts/short-details', { viewData, isAdmin, isSaved })
         })
         .catch(err => next(err))
 })
@@ -142,6 +151,7 @@ router.get('/masterpieces', (req, res, next) => {
 
     Short
         .find({ isMasterpiece: true })
+        .populate('author')
         .then(masterpieces => res.render('shorts/masterpieces', { masterpieces }))
         .catch(err => next(err))
 
@@ -150,6 +160,7 @@ router.get('/masterpieces', (req, res, next) => {
 router.get('/bullshits', (req, res, next) => {
     Short
         .find({ isBullshit: true })
+        .populate('author')
         .then(bullshits => res.render('shorts/bullshits', { bullshits }))
         .catch(err => next(err))
 })

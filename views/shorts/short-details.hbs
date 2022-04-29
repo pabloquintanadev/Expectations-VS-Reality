@@ -23,18 +23,21 @@
 
 <a href="/shorts/edit/{{viewData.shortInfo.id}}">EDITAR ESTA PUTA OBRA MAESTRA
 </a>
-
+{{#unless isSaved}}
 <form action="/shorts/save/{{viewData.shortInfo.id}}" method="POST">
   <button class="btn btn-outline-danger btn-md px-3" type="submit">
     SAVE
   </button>
 </form>
+{{/unless}}
 
+{{#if isSaved}}
 <form action="/shorts/unsave/{{viewData.shortInfo.id}}" method="POST">
   <button class="btn btn-outline-danger btn-md px-3" type="submit">
     UNSAVE
   </button>
 </form>
+{{/if}}
 {{#if isAdmin}}
 
 <form action="/valoration/{{viewData.shortInfo.id}}/masterpiece" method="POST">
