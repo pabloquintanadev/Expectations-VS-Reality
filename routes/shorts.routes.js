@@ -85,17 +85,20 @@ router.get('/details/:shortId', (req, res, next) => {
 
 //SHORT EDIT
 
-router.get('/edit/:shortId', (req, res, next) => {
+router.get('/editshort/:shortId', (req, res, next) => {
 
     Short
         .findById(req.params.shortId)
+        .populate('author')
         .then(short => {
+
             res.render('shorts/edit-form', short)
         })
+
         .catch(err => next(err))
 })
 
-router.post('/edit/:shortId', (req, res, next) => {
+router.post('/editshort/:shortId', (req, res, next) => {
 
     Short
         .findByIdAndUpdate(req.params.shortId, req.body)

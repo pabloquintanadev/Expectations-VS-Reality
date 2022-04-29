@@ -14,14 +14,14 @@
       {{#if isOwnUser}}
       {{#unless isMasterpiece}}
       {{#unless isBullshit}}
-      <a class="btn green-btn" href="/shorts/edit/{{viewData.shortInfo.id}}">EDITAR</a>
+      <a class="btn green-btn" href="/shorts/editshort/{{viewData.shortInfo.id}}">EDITAR</a>
       {{/unless}}
       {{/unless}}
       {{#if isMasterpiece}}
-      <a class="btn green-btn" href="/shorts/edit/{{viewData.shortInfo.id}}">EDITAR ESTA PUTA OBRA MAESTRA</a>
+      <a class="btn green-btn" href="/shorts/editshort/{{viewData.shortInfo.id}}">EDITAR ESTA PUTA OBRA MAESTRA</a>
       {{/if}}
       {{#if isBullshit}}
-      <a class="btn red-btn" href="/shorts/edit/{{viewData.shortInfo.id}}">EDITAR ESTA PUTA BASURA</a>
+      <a class="btn red-btn" href="/shorts/editshort/{{viewData.shortInfo.id}}">EDITAR ESTA PUTA BASURA</a>
       {{/if}}
       {{/if}}
       <div class="container d-flex flex-row">
