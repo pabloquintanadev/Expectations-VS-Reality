@@ -7,67 +7,82 @@
       </figure>
     </div>
     <div class="col-md-6">
-      <h5 class="card-title"><strong>{{viewData.shortInfo.title}}</strong> 
-      by <i> <a href="/profile/details/{{viewData.shortInfo.author.id}}"> {{viewData.shortInfo.author.username}}</a>
+      <h5 class="card-title"><strong>{{viewData.shortInfo.title}}</strong>
+        by <i> <a href="/profile/details/{{viewData.shortInfo.author.id}}"> {{viewData.shortInfo.author.username}}</a>
       </h5>
       <p class="card-text">{{viewData.shortInfo.summary}}</p>
-      {{!-- {{#if isMasterpiece}} --}}
+      {{#if isOwnUser}}
+      {{#unless isMasterpiece}}
+      {{#unless isBullshit}}
+      <a class="btn green-btn" href="/shorts/edit/{{viewData.shortInfo.id}}">EDITAR</a>
+      {{/unless}}
+      {{/unless}}
+      {{#if isMasterpiece}}
       <a class="btn green-btn" href="/shorts/edit/{{viewData.shortInfo.id}}">EDITAR ESTA PUTA OBRA MAESTRA</a>
-      {{!-- {{/if}}
+      {{/if}}
       {{#if isBullshit}}
       <a class="btn red-btn" href="/shorts/edit/{{viewData.shortInfo.id}}">EDITAR ESTA PUTA BASURA</a>
-      {{/if}} --}}
+      {{/if}}
+      {{/if}}
       <div class="container d-flex flex-row">
         {{#unless isSaved}}
-          <form action="/shorts/save/{{viewData.shortInfo.id}}" method="POST">
-            <button class="btn green-btn btn-md px-3" type="submit">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bookmark-star" viewBox="0 0 16 16">
-                <path d="M7.84 4.1a.178.178 0 0 1 .32 0l.634 1.285a.178.178 0 0 0 .134.098l1.42.206c.145.021.204.2.098.303L9.42 6.993a.178.178 0 0 0-.051.158l.242 1.414a.178.178 0 0 1-.258.187l-1.27-.668a.178.178 0 0 0-.165 0l-1.27.668a.178.178 0 0 1-.257-.187l.242-1.414a.178.178 0 0 0-.05-.158l-1.03-1.001a.178.178 0 0 1 .098-.303l1.42-.206a.178.178 0 0 0 .134-.098L7.84 4.1z"/>
-                <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z"/>
-              </svg>
-            </button>
-          </form>
-          {{/unless}}
+        <form action="/shorts/save/{{viewData.shortInfo.id}}" method="POST">
+          <button class="btn green-btn btn-md px-3" type="submit">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+              class="bi bi-bookmark-star" viewBox="0 0 16 16">
+              <path
+                d="M7.84 4.1a.178.178 0 0 1 .32 0l.634 1.285a.178.178 0 0 0 .134.098l1.42.206c.145.021.204.2.098.303L9.42 6.993a.178.178 0 0 0-.051.158l.242 1.414a.178.178 0 0 1-.258.187l-1.27-.668a.178.178 0 0 0-.165 0l-1.27.668a.178.178 0 0 1-.257-.187l.242-1.414a.178.178 0 0 0-.05-.158l-1.03-1.001a.178.178 0 0 1 .098-.303l1.42-.206a.178.178 0 0 0 .134-.098L7.84 4.1z" />
+              <path
+                d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z" />
+            </svg>
+          </button>
+        </form>
+        {{/unless}}
 
-          {{#if isSaved}}
-          <form action="/shorts/unsave/{{viewData.shortInfo.id}}" method="POST">
-            <button class="btn red-btn btn-md px-3" type="submit">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bookmark-star" viewBox="0 0 16 16">
-                <path d="M7.84 4.1a.178.178 0 0 1 .32 0l.634 1.285a.178.178 0 0 0 .134.098l1.42.206c.145.021.204.2.098.303L9.42 6.993a.178.178 0 0 0-.051.158l.242 1.414a.178.178 0 0 1-.258.187l-1.27-.668a.178.178 0 0 0-.165 0l-1.27.668a.178.178 0 0 1-.257-.187l.242-1.414a.178.178 0 0 0-.05-.158l-1.03-1.001a.178.178 0 0 1 .098-.303l1.42-.206a.178.178 0 0 0 .134-.098L7.84 4.1z"/>
-                <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z"/>
-              </svg>
-            </button>
-          </form>
-          {{/if}}
-          <form action="/valoration/shortlike/{{viewData.shortInfo.author.id}}/{{viewData.shortInfo.id}}" method="POST">
-            <button class="btn red-btn btn-md px-3" type="submit">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
-                <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
-              </svg>
-            </button>
-          </form>
-          {{#if isAdmin}}
+        {{#if isSaved}}
+        <form action="/shorts/unsave/{{viewData.shortInfo.id}}" method="POST">
+          <button class="btn red-btn btn-md px-3" type="submit">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+              class="bi bi-bookmark-star" viewBox="0 0 16 16">
+              <path
+                d="M7.84 4.1a.178.178 0 0 1 .32 0l.634 1.285a.178.178 0 0 0 .134.098l1.42.206c.145.021.204.2.098.303L9.42 6.993a.178.178 0 0 0-.051.158l.242 1.414a.178.178 0 0 1-.258.187l-1.27-.668a.178.178 0 0 0-.165 0l-1.27.668a.178.178 0 0 1-.257-.187l.242-1.414a.178.178 0 0 0-.05-.158l-1.03-1.001a.178.178 0 0 1 .098-.303l1.42-.206a.178.178 0 0 0 .134-.098L7.84 4.1z" />
+              <path
+                d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z" />
+            </svg>
+          </button>
+        </form>
+        {{/if}}
+        <form action="/valoration/shortlike/{{viewData.shortInfo.author.id}}/{{viewData.shortInfo.id}}" method="POST">
+          <button class="btn red-btn btn-md px-3" type="submit">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart"
+              viewBox="0 0 16 16">
+              <path
+                d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
+            </svg>
+          </button>
+        </form>
+        {{#if isAdmin}}
       </div>
-<div class="container d-flex flex-row justify-content-center mb-0 pb-0">
-  <h5>Oh fuck this is a</h5>
-</div>
-<div class="container d-flex flex-row justify-content-evenly">
-<form action="/valoration/{{viewData.shortInfo.id}}/masterpiece" method="POST">
-  <button class="btn green-btn btn-md w-100 px-2" type="submit">
-    FUCKING MASTERPIECE
-  </button>
-</form>
-<form action="/valoration/{{viewData.shortInfo.id}}/bullshit" method="POST">
-  <button class="btn red-btn btn-md w-100 px-4" type="submit">
-    DAMN BULLSHIT
-  </button>
-</form>
-</div>
-{{/if}}
+      <div class="container d-flex flex-row justify-content-center mb-0 pb-0">
+        <h5>Oh fuck this is a</h5>
+      </div>
+      <div class="container d-flex flex-row justify-content-evenly">
+        <form action="/valoration/{{viewData.shortInfo.id}}/masterpiece" method="POST">
+          <button class="btn green-btn btn-md w-100 px-2" type="submit">
+            FUCKING MASTERPIECE
+          </button>
+        </form>
+        <form action="/valoration/{{viewData.shortInfo.id}}/bullshit" method="POST">
+          <button class="btn red-btn btn-md w-100 px-4" type="submit">
+            DAMN BULLSHIT
+          </button>
+        </form>
+      </div>
+      {{/if}}
     </div>
   </div>
 </div>
-    
+
 
 <form action="/posts/shorts/{{viewData.shortInfo.id}}/new-post" method="POST">
   <div class="mb-3">
@@ -84,12 +99,12 @@
     {{/if}}
     <div class="container">
       <div class="row">
-         <div class="col-md-10">
+        <div class="col-md-10">
           <input id="type" name="type" type="hidden" value="COMMENT">
         </div>
         <div class="col-md-2">
           <div class="row justify-content-right">
-          <button type="submit" class="btn green-btn w-50">Send Post</button>
+            <button type="submit" class="btn green-btn w-50">Send Post</button>
           </div>
         </div>
       </div>
@@ -115,7 +130,7 @@
 
             TEXTO: {{textContent}}
 
-            <form action="/valoration/shortlike/{{author.id}}/{{id}}" method="POST">
+            <form action="/valoration/shortlike/{{author.id}}/{{./../viewData.shortInfo.id}}" method="POST">
               <button class="btn btn-outline-danger btn-md px-3" type="submit">
                 LIKE THIS COMMENT </button>
             </form>

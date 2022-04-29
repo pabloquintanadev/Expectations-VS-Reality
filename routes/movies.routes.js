@@ -36,13 +36,16 @@ router.get('/details/:movieId', (req, res, next) => {
             .populate('author'),
         Post.find({ movieOrShortId: movieId, type: 'SPOILER' })
             .populate('author'),
+        User
+            .findById(req.session.currentUser._id)
     ]
 
     Promise
         .all(promises)
-        .then(([movieInfo, comments, spoilers]) => {
+        .then(([movieInfo, comments, spoilers, user]) => {
             const viewData = { movieInfo: movieInfo.data, comments, spoilers }
-            res.render('movies/movie-details', { viewData, isAdmin })
+            const isSaved = user.savedMovies.includes(movieId)
+            res.render('movies/movie-details', { viewData, isAdmin, isSaved })
         })
         .catch(err => next(err))
 })

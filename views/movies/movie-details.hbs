@@ -14,7 +14,8 @@
                         {{viewData.movieInfo.videoDescription}}
                         <br>
                     <div class="container d-flex flex-row justify-content-evenly">
-                        {{!-- {{#if isNotSaved}} --}}
+                        {{#unless isSaved}}
+
                         <form action="/movies/{{viewData.movieInfo.imDbId}}/save" method="POST">
                             <button class="btn green-btn btn-md my-0 py-0" type="submit">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -26,9 +27,9 @@
                                 </svg>
                             </button>
                         </form>
-                        {{!-- {{/if}} --}}
+                        {{/unless}}
 
-                        {{!-- {{#if isSaved}} --}}
+                        {{#if isSaved}}
                         <form action="/movies/{{viewData.movieInfo.imDbId}}/unsave" method="POST">
                             <button class="btn red-btn btn-md my-0 py-0" type="submit">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -40,7 +41,7 @@
                                 </svg>
                             </button>
                         </form>
-                        {{!-- {{/if}} --}}
+                        {{/if}}
                     </div>
                     </p>
                 </div>

@@ -56,8 +56,6 @@ router.get('/details/:shortId', (req, res, next) => {
 
     const isAdmin = req.session.currentUser.role === 'ADMIN'
 
-    // const isSaved = req.session.currentUser.savedShorts.includes(shortId)
-
     const promises = [
         Short.findById(shortId)
             .populate('author'),
@@ -74,8 +72,11 @@ router.get('/details/:shortId', (req, res, next) => {
         .then(([shortInfo, comments, spoilers, user]) => {
             const viewData = { shortInfo, comments, spoilers }
             const isSaved = user.savedShorts.includes(shortId)
+            const isOwnUser = req.session.currentUser._id === shortInfo.author.id
+            const isMasterpiece = shortInfo.isMasterpiece === true
+            const isBullshit = shortInfo.isBullshit === true
 
-            res.render('shorts/short-details', { viewData, isAdmin, isSaved })
+            res.render('shorts/short-details', { viewData, isAdmin, isSaved, isOwnUser, isMasterpiece, isBullshit })
         })
         .catch(err => next(err))
 })
