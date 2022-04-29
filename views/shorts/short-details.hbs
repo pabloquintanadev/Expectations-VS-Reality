@@ -123,12 +123,14 @@
     <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show"
       aria-labelledby="panelsStayOpen-headingOne">
       <div class="accordion-body">
-        aquí comentarios
         <ul>{{#each viewData.comments}}
 
-          <li>USER: {{author.username}}
+          <li>
+            <h5 class="comments">usuario: {{author.username}}</h5>
 
-            TEXTO: {{textContent}}
+            <p class="comments"> comentario: </p>
+            <p class="comments"> {{textContent}}</p>
+
 
             <form action="/valoration/shortlike/{{author.id}}/{{./../viewData.shortInfo.id}}" method="POST">
               <button class="btn btn-outline-danger btn-md px-3" type="submit">
@@ -142,10 +144,8 @@
             {{/if}}
 
           </li>
-
-
-
-
+          <hr>
+          <hr>
           {{/each}}
         </ul>
 

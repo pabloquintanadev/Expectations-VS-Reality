@@ -103,9 +103,11 @@
             aria-labelledby="panelsStayOpen-headingOne">
             <div class="accordion-body">
                 <ul>{{#each viewData.comments}}
-                    <li>USER: {{author.username}}
+                    <li>
+                        <h5 class="comments">usuario: {{author.username}}</h5>
 
-                        TEXTO: {{textContent}}
+                        <p class="comments"> comentario: </p>
+                        <p class="comments"> {{textContent}}</p>
 
                         <form action="/valoration/movielike/{{author.id}}/{{./../viewData.movieInfo.imDbId}}"
                             method="POST">
@@ -138,8 +140,12 @@
             aria-labelledby="panelsStayOpen-headingTwo">
             <div class="accordion-body">
                 <ul>{{#each viewData.spoilers}}
-                    <li>USER: {{author.username}}
-                        TEXTO: {{textContent}}</li>
+                    <li>
+                        <h5 class="comments">usuario: {{author.username}}</h5>
+
+                        <p class="comments"> spoiler: </p>
+                        <p class="comments"> {{textContent}}</p>
+                    </li>
                     <form action="/valoration/movielike/{{author.id}}/{{./../viewData.movieInfo.imDbId}}" method="POST">
                         <button class="btn btn-outline-danger btn-md px-3" type="submit">
                             LIKE THIS SPOILER </button>

@@ -11,7 +11,7 @@ body {
   padding: 50px;
   font-family: 'Bebas Neue', cursive;
   background: #1f1f1f;
-  }
+}
 
 .logout-btn {
   color: black;
@@ -19,64 +19,78 @@ body {
   border: 0;
 }
 
-li{
+li {
   list-style: none;
 }
-li>a{
+
+li>a {
   text-decoration: none;
 }
 
-.card{
+.card {
   z-index: -1;
 }
 
-.accordion-button{
-  color:#23a125;
+.accordion-button {
+  color: #23a125;
   background-color: #1f1f1f;
 }
 
-.accordion-item{
-  border-color: #23a125;
-}
-.accordion-header{
+.accordion-item {
   border-color: #23a125;
 }
 
-.btn-sizing{
+.accordion-header {
+  border-color: #23a125;
+}
+
+.btn-sizing {
   width: 30px;
   height: 30px;
 }
 
-h1, h2, h3, h4, h5, a, p, label{
-  color:white;
+h1,
+h2,
+h3,
+h4,
+h5,
+a,
+p,
+label {
+  color: white;
 }
-.huge{
+
+.comments {
+  color: #1f1f1f
+}
+
+.huge {
   font-size: 60px;
 }
 
 .green-color {
-  color:#23a125;
+  color: #23a125;
   text-decoration: none;
 }
 
 .green-color-bg {
-  background-color:#23a125;
+  background-color: #23a125;
 }
 
-.profile-border{
+.profile-border {
   border-color: #23a125;
   border-width: 5px;
   border-style: groove;
 }
 
-.profile-border-small{
+.profile-border-small {
   border-color: #23a125;
   border-width: 1px;
   border-style: solid;
 }
 
-.profile-text{
-  font-size:60px;
+.profile-text {
+  font-size: 60px;
   text-decoration: none;
 }
 
@@ -96,9 +110,9 @@ h1, h2, h3, h4, h5, a, p, label{
   border-radius: 6px;
   font-weight: 500;
   color: var(--color);
- }
- 
- .green-btn:before {
+}
+
+.green-btn:before {
   content: "";
   position: absolute;
   z-index: -1;
@@ -106,28 +120,29 @@ h1, h2, h3, h4, h5, a, p, label{
   height: 150px;
   width: 200px;
   border-radius: 50%;
- }
- 
- .green-btn:hover {
+}
+
+.green-btn:hover {
   color: #fff;
- }
- 
- .green-btn:before {
+}
+
+.green-btn:before {
   top: 100%;
   left: 100%;
   transition: all .3s;
- }
- 
- .green-btn:hover:before {
+}
+
+.green-btn:hover:before {
   top: -30px;
   left: -30px;
- }
- 
- .green-btn:active:before {
+}
+
+.green-btn:active:before {
   background: #23a125;
   transition: background 0s;
- }
- .red-btn {
+}
+
+.red-btn {
   --color: #f62b2b;
   font-family: inherit;
   display: inline-block;
@@ -142,9 +157,9 @@ h1, h2, h3, h4, h5, a, p, label{
   border-radius: 6px;
   font-weight: 500;
   color: var(--color);
- }
- 
- .red-btn:before {
+}
+
+.red-btn:before {
   content: "";
   position: absolute;
   z-index: -1;
@@ -152,36 +167,37 @@ h1, h2, h3, h4, h5, a, p, label{
   height: 150px;
   width: 200px;
   border-radius: 50%;
- }
- 
- .red-btn:hover {
+}
+
+.red-btn:hover {
   color: #fff;
- }
- 
- .red-btn:before {
+}
+
+.red-btn:before {
   top: 100%;
   left: 100%;
   transition: all .3s;
- }
- 
- .red-btn:hover:before {
+}
+
+.red-btn:hover:before {
   top: -30px;
   left: -30px;
- }
- 
- .red-btn:active:before {
+}
+
+.red-btn:active:before {
   background: #23a125;
   transition: background 0s;
- }
+}
 
 a {
   color: #23a125;
 }
 
 h1 {
-  color: 15px ;
+  color: 15px;
 }
-.animated-title-container{
+
+.animated-title-container {
   height: 400px;
   display: flex;
   flex-direction: column;
@@ -189,7 +205,7 @@ h1 {
 
 }
 
-.animated-title{
+.animated-title {
   color: #23a125;
   font-size: 200px;
   display: flex;
@@ -197,7 +213,7 @@ h1 {
   justify-content: center;
 }
 
-.animated-title-small{
+.animated-title-small {
   color: #23a125;
   font-size: 15px;
   display: flex;
@@ -213,111 +229,111 @@ h1 {
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.3);
-  }
+}
 
 .glass-back {
-/* From https://css.glass */
-z-index: index -100;;
-background: rgba(255, 255, 255, 0.2);
-border-radius: 16px;
-box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-backdrop-filter: blur(20px);
--webkit-backdrop-filter: blur(20px);
-border: 1px solid rgba(255, 255, 255, 0.3);
+  /* From https://css.glass */
+  z-index: index -100;
+  ;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 
 /* From uiverse.io by @namecho */
 .animated-title::after {
- padding: 16px 20px;
- font-size: 18px;
- border: 0;
- color: #F0187D;
- letter-spacing: 3px;
- line-height: 1;
- box-shadow: 6px 0px 0px #F0187D;
- outline: transparent;
- position: relative;
+  padding: 16px 20px;
+  font-size: 18px;
+  border: 0;
+  color: #F0187D;
+  letter-spacing: 3px;
+  line-height: 1;
+  box-shadow: 6px 0px 0px #F0187D;
+  outline: transparent;
+  position: relative;
 }
 
 .animated-title::after {
- --slice-0: inset(50% 50% 50% 50%);
- --slice-1: inset(80% -6px 0 0);
- --slice-2: inset(50% -6px 30% 0);
- --slice-3: inset(10% -6px 85% 0);
- --slice-4: inset(40% -6px 43% 0);
- --slice-5: inset(80% -6px 5% 0);
- content: "HOVER ME";
- display: block;
- position: absolute;
- top: 0;
- left: 0;
- right: 0;
- bottom: 0;
- background: linear-gradient(45deg, transparent 3%, white 3%, white 5%, #23a125 5%);
- text-shadow: -3px -3px 0px #f8f005, 3px 3px 0px #F0187D;
- clip-path: var(--slice-0);
+  --slice-0: inset(50% 50% 50% 50%);
+  --slice-1: inset(80% -6px 0 0);
+  --slice-2: inset(50% -6px 30% 0);
+  --slice-3: inset(10% -6px 85% 0);
+  --slice-4: inset(40% -6px 43% 0);
+  --slice-5: inset(80% -6px 5% 0);
+  content: "HOVER ME";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, transparent 3%, white 3%, white 5%, #23a125 5%);
+  text-shadow: -3px -3px 0px #f8f005, 3px 3px 0px #F0187D;
+  clip-path: var(--slice-0);
 }
 
 .animated-title:hover::after {
- animation: 1s glitch;
- animation-timing-function: steps(2, end);
+  animation: 1s glitch;
+  animation-timing-function: steps(2, end);
 }
 
 @keyframes glitch {
- 0% {
-  clip-path: var(--slice-1);
-  transform: translate(-20px, -10px);
- }
+  0% {
+    clip-path: var(--slice-1);
+    transform: translate(-20px, -10px);
+  }
 
- 10% {
-  clip-path: var(--slice-3);
-  transform: translate(10px, 10px);
- }
+  10% {
+    clip-path: var(--slice-3);
+    transform: translate(10px, 10px);
+  }
 
- 20% {
-  clip-path: var(--slice-1);
-  transform: translate(-10px, 10px);
- }
+  20% {
+    clip-path: var(--slice-1);
+    transform: translate(-10px, 10px);
+  }
 
- 30% {
-  clip-path: var(--slice-3);
-  transform: translate(0px, 5px);
- }
+  30% {
+    clip-path: var(--slice-3);
+    transform: translate(0px, 5px);
+  }
 
- 40% {
-  clip-path: var(--slice-2);
-  transform: translate(-5px, 0px);
- }
+  40% {
+    clip-path: var(--slice-2);
+    transform: translate(-5px, 0px);
+  }
 
- 50% {
-  clip-path: var(--slice-3);
-  transform: translate(5px, 0px);
- }
+  50% {
+    clip-path: var(--slice-3);
+    transform: translate(5px, 0px);
+  }
 
- 60% {
-  clip-path: var(--slice-4);
-  transform: translate(5px, 10px);
- }
+  60% {
+    clip-path: var(--slice-4);
+    transform: translate(5px, 10px);
+  }
 
- 70% {
-  clip-path: var(--slice-2);
-  transform: translate(-10px, 10px);
- }
+  70% {
+    clip-path: var(--slice-2);
+    transform: translate(-10px, 10px);
+  }
 
- 80% {
-  clip-path: var(--slice-5);
-  transform: translate(20px, -10px);
- }
+  80% {
+    clip-path: var(--slice-5);
+    transform: translate(20px, -10px);
+  }
 
- 90% {
-  clip-path: var(--slice-1);
-  transform: translate(-10px, 0px);
- }
+  90% {
+    clip-path: var(--slice-1);
+    transform: translate(-10px, 0px);
+  }
 
- 100% {
-  clip-path: var(--slice-1);
-  transform: translate(0);
- }
+  100% {
+    clip-path: var(--slice-1);
+    transform: translate(0);
+  }
 }
-
