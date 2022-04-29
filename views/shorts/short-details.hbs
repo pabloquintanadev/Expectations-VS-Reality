@@ -66,6 +66,8 @@
       <div class="container d-flex flex-row justify-content-center mb-0 pb-0">
         <h5>Oh fuck this is a</h5>
       </div>
+      {{#unless isMasterpiece}}
+      {{#unless isBullshit}}
       <div class="container d-flex flex-row justify-content-evenly">
         <form action="/valoration/{{viewData.shortInfo.id}}/masterpiece" method="POST">
           <button class="btn green-btn btn-md w-100 px-2" type="submit">
@@ -78,6 +80,27 @@
           </button>
         </form>
       </div>
+      {{/unless}}
+      {{/unless}}
+      <div class="container d-flex flex-row justify-content-evenly">
+        {{#if isBullshit}}
+
+        <form action="/valoration/{{viewData.shortInfo.id}}/masterpiece" method="POST">
+          <button class="btn green-btn btn-md w-100 px-2" type="submit">
+            FUCKING MASTERPIECE
+          </button>
+        </form>
+        {{/if}}
+        {{#if isMasterpiece}}
+
+        <form action="/valoration/{{viewData.shortInfo.id}}/bullshit" method="POST">
+          <button class="btn red-btn btn-md w-100 px-4" type="submit">
+            DAMN BULLSHIT
+          </button>
+        </form>
+        {{/if}}
+      </div>
+
       {{/if}}
     </div>
   </div>
@@ -139,7 +162,7 @@
             {{#if ./../isAdmin}}
             <form action="/posts/shorts/{{id}}/delete/{{./../viewData.shortInfo.id}}" method="POST">
               <button class="btn btn-outline-danger btn-md px-3" type="submit">
-                BORRAR JODER</button>
+                BORRAR</button>
             </form>
             {{/if}}
 
