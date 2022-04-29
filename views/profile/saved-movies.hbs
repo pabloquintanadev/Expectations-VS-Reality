@@ -1,11 +1,14 @@
-LISTA DE PELIS GUARDADAAAAS
-
-
-
-
-<ul>
-    {{#each responses}}
-    <li><a href="/movies/details/{{data.imDbId}}">{{data.title}}</a></li>
-
-    {{/each}}
-</ul>
+<div class="container pl-5 pt-3">
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+            <h3>Saved movies</h3>
+            <ul>
+                {{#each responses}}
+                    <li class="d-flex flex-row align-items green-color mb-3">
+                        <a href="/movies/details/{{data.imDbId}}">{{data.title}}</a>
+                    </li>
+                {{/each}}
+            </ul>
+        </div>
+    </div>
+</div>

@@ -1,8 +1,14 @@
-LISTA DE cortos GUARDADAAAAS de {{username}}
-
-<ul>
-    {{#each savedShorts}}
-    <li><a href="/shorts/details/{{_id}}">{{title}} </a></li> by {{author.username}}
-
-    {{/each}}
-</ul>
+<div class="container pl-5 pt-3">
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+            <h3>Saved shorts</h3>
+            <ul>
+                {{#each savedShorts}}
+                    <li class="d-flex flex-row align-items green-color mb-3">
+                        <a href="/shorts/details/{{_id}}">{{title}}</a>
+                    </li>
+                {{/each}}
+            </ul>
+        </div>
+    </div>
+</div>
